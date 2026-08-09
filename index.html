@@ -1,0 +1,2890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F4ECEB">
+<title>Corroded Pipeline Fit For Service Assessment — B31G · RSTRENG · DNV F101 · API 579</title>
+<style>
+:root{
+  /* AZURE — default */
+  --paper:#E9EFF5; --card:#FFFFFF; --sunk:#F3F7FA;
+  --ink:#16283A; --ink-2:#52687D; --ink-3:#8399AC;
+  --line:#CBD8E3; --line-2:#E0E9F1;
+
+  --orig:#A08A57; --mod:#C67B50; --rs:#4A9280; --dnv:#5077A8; --api:#8069B4;
+  --api-2:#A897CE;
+  --dnv-2:#87A9CC;
+  --ok:#147A63; --warn:#A8721C; --bad:#B03A32;
+
+  --fig-steel:#B4C6D6; --fig-edge:#6E88A0; --fig-void:#FBFCFD;
+  --grid:#DCE6EE; --axis:#3A5670; --track:#DFE8F0;
+  --loss:#C2482F; --band:#C08A2E;
+  --hero-bg:#1B4F8C; --hero-fg:#FFFFFF;
+  --warn-bg:#FAF2E4; --warn-fg:#6B4711;
+  --bad-bg:#FAEDEC;  --bad-fg:#72211C;
+  --c1:#93B8DC; --c2:#5589BD; --c3:#2E6AA3; --c4:#143F70;
+
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Roboto Mono",monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --accent:var(--dnv);
+}
+
+/* ---- VERDE ---- */
+body.t-verde{
+  --paper:#EAF2EC; --card:#FFFFFF; --sunk:#F3F8F4;
+  --ink:#16291F; --ink-2:#4F6857; --ink-3:#829685;
+  --line:#CCDBD0; --line-2:#E1EBE4;
+  --orig:#A08A57; --mod:#C67B50; --rs:#52886D; --dnv:#5286A6; --api:#8069B4;
+  --api-2:#A897CE;
+  --dnv-2:#8AB0C6;
+  --ok:#1B5E3F; --warn:#A8721C; --bad:#B03A32;
+  --fig-steel:#B2C8BA; --fig-edge:#6C8A78; --fig-void:#FBFDFB;
+  --grid:#DCE8E0; --axis:#3A5A48; --track:#DFEAE3;
+  --loss:#C2482F; --band:#C08A2E;
+  --hero-bg:#1B5E3F;
+  --warn-bg:#FAF3E4; --bad-bg:#FAEDEC;
+  --c1:#8FC3A8; --c2:#4E9C79; --c3:#2A7554; --c4:#124A31;
+}
+
+/* ---- CRIMSON ---- */
+body.t-crimson{
+  --paper:#F4ECEB; --card:#FFFDFC; --sunk:#FAF4F3;
+  --ink:#2C1B19; --ink-2:#6B5250; --ink-3:#9C817E;
+  --line:#DFCECB; --line-2:#EDDFDD;
+  --orig:#A6874F; --mod:#C67B50; --rs:#559179; --dnv:#5780A4; --api:#8C6DAE;
+  --api-2:#B3A2C9;
+  --dnv-2:#8DAAC1;
+  --ok:#1F6B4F; --warn:#A2691A; --bad:#9B2C2C;
+  --fig-steel:#D6C0BC; --fig-edge:#9A7A76; --fig-void:#FEFBFA;
+  --grid:#EBDCDA; --axis:#5E403D; --track:#EEE0DE;
+  --loss:#8C1F1F; --band:#B07C20;
+  --hero-bg:#9B2C2C;
+  --warn-bg:#FAF2E3; --warn-fg:#6B4711;
+  --bad-bg:#F8E7E6; --bad-fg:#6B1E1E;
+  --c1:#DC9E9B; --c2:#C56E6A; --c3:#A84440; --c4:#7A1F1F;
+}
+
+/* ---- VIOLET ---- */
+body.t-violet{
+  --paper:#EFEDF6; --card:#FFFFFF; --sunk:#F6F4FA;
+  --ink:#221C33; --ink-2:#5C5478; --ink-3:#8E87A8;
+  --line:#D4CDE3; --line-2:#E5E0EF;
+  --orig:#A08A57; --mod:#C47D52; --rs:#52907C; --dnv:#5580AE; --api:#7866B0;
+  --api-2:#A395CC;
+  --dnv-2:#92A8D2;
+  --ok:#1B6B57; --warn:#A2701C; --bad:#AF3A38;
+  --fig-steel:#C3BBD9; --fig-edge:#8076A4; --fig-void:#FCFBFE;
+  --grid:#E4DFEF; --axis:#453A66; --track:#E7E2F1;
+  --loss:#C2482F; --band:#C08A2E;
+  --hero-bg:#4C3A8C;
+  --warn-bg:#F9F2E4; --bad-bg:#FAEDEC;
+  --c1:#ADA3D4; --c2:#7E70B7; --c3:#57469A; --c4:#362772;
+}
+
+/* ---- CARBON ---- */
+body.t-carbon{
+  --paper:#12171A; --card:#1B2226; --sunk:#161C1F;
+  --ink:#E3EAEE; --ink-2:#9DAEB8; --ink-3:#6F828D;
+  --line:#2C363B; --line-2:#252E33;
+  --orig:#C9A876; --mod:#DE9463; --rs:#63BFA4; --dnv:#7DAFD2; --api:#AA95D6;
+  --api-2:#C6B6E8;
+  --dnv-2:#8FC8E4;
+  --ok:#3FBF98; --warn:#E0A94A; --bad:#E8695E;
+  --fig-steel:#33414A; --fig-edge:#5E7280; --fig-void:#0E1315;
+  --grid:#243036; --axis:#7D919C; --track:#232D33;
+  --loss:#E8695E; --band:#E0A94A;
+  --hero-bg:#0C1114; --hero-fg:#E3EAEE;
+  --warn-bg:#2A2318; --warn-fg:#E8C68A;
+  --bad-bg:#2C1B19;  --bad-fg:#F0A79E;
+  --c1:#A9E8D2; --c2:#6FD5B4; --c3:#3FBF98; --c4:#1F9B77;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{overflow-x:hidden;max-width:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.45;-webkit-text-size-adjust:100%}
+.wrap{width:100%;max-width:660px;margin:0 auto;padding:14px 16px 56px}
+body.wide .wrap{max-width:none;padding-left:28px;padding-right:28px}
+
+header{padding:16px 0 13px;border-bottom:2px solid var(--ink);position:relative;
+  display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+h1{font-size:21px;letter-spacing:-.4px;margin:0;font-weight:750}
+body.wide h1{font-size:27px}
+header .sub{font-family:var(--mono);font-size:11px;letter-spacing:.7px;
+  text-transform:uppercase;color:var(--ink-2);margin-top:6px}
+.viewtog{display:flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;
+  flex:none;background:var(--card)}
+.viewtog button{border:none;background:transparent;color:var(--ink-2);cursor:pointer;
+  font-family:var(--mono);font-size:11px;padding:8px 12px;letter-spacing:.4px}
+.viewtog button[aria-pressed=true]{background:var(--hero-bg);color:var(--hero-fg)}
+
+/* hover tooltips — pointer devices only */
+@media (hover:hover) and (pointer:fine){
+  [data-tip]{position:relative}
+  [data-tip]:hover::after{
+    content:attr(data-tip);position:absolute;top:calc(100% + 7px);left:50%;
+    transform:translateX(-50%);background:var(--hero-bg);color:var(--hero-fg);
+    font-family:var(--sans);font-size:11.5px;font-weight:400;line-height:1.45;
+    letter-spacing:0;text-transform:none;padding:7px 10px;border-radius:7px;
+    width:max-content;max-width:250px;white-space:normal;text-align:left;z-index:60;
+    pointer-events:none;box-shadow:0 6px 18px rgba(0,0,0,.20)}
+  .tools [data-tip]:hover::after,.palmenu [data-tip]:hover::after{
+    left:auto;right:0;transform:none}
+  .palmenu [data-tip]:hover::after{top:auto;bottom:calc(100% + 4px)}
+}
+
+/* which method needs which input */
+.req{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
+.req b{font-family:var(--mono);font-size:8.5px;font-weight:600;letter-spacing:.5px;
+  text-transform:uppercase;padding:2px 5px;border-radius:4px;border:1px solid currentColor;
+  opacity:.9}
+.req b.all{color:var(--ink-2)}
+.req b.orig{color:var(--orig)}  .req b.mod{color:var(--mod)}
+.req b.rs{color:var(--rs)}      .req b.dnv{color:var(--dnv)}
+.req b.api{color:var(--api)}
+.reqkey{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px}
+.ctl .req{margin:6px 0 2px}
+.uu{font-size:10px;color:var(--ink-3);margin-left:4px;font-weight:400}
+
+/* input rows stack rather than collide on a phone */
+@media (max-width:560px){
+  .frow{flex-wrap:wrap;align-items:flex-start;gap:0 10px}
+  .frow label{flex:1 1 100%}
+  .frow input[type=number],.frow input.txtin,.frow select{flex:1 1 auto;width:auto;
+    min-width:0;margin-top:7px;font-size:16px}
+  .frow .unit{margin-top:7px;align-self:center;width:auto;min-width:26px}
+  .drop{flex-direction:column;gap:8px;padding:18px 14px;text-align:center}
+  .droptxt{text-align:center}
+  .btnrow .btn{flex:1 1 auto}
+}
+
+/* editable grid stacks into labelled cards on a phone */
+@media (max-width:760px){
+  .etab{min-width:0;table-layout:auto;display:block}
+  .etab colgroup{display:none}
+  .etab tr.hdr{display:none}
+  .etab tr{display:block;border-bottom:1px solid var(--line);padding:10px 0 12px;
+    position:relative}
+  .etab tr:last-child{border-bottom:none}
+  .etab td{display:grid;grid-template-columns:104px minmax(0,1fr);align-items:center;
+    gap:10px;border:none;padding:3px 0}
+  .etab td::before{content:attr(data-label);font-family:var(--mono);font-size:9.5px;
+    letter-spacing:.6px;text-transform:uppercase;color:var(--ink-3)}
+  .etab td.ro{text-align:left;justify-items:start}
+  .etab td input,.etab td select{width:100%;text-align:left;text-align-last:left;
+    border-color:var(--line);background:var(--card);font-size:16px;padding:8px 9px}
+  .etab td.act{position:absolute;top:8px;right:0;display:block;padding:0}
+  .etab td.act::before{content:""}
+  .etab .del{font-size:18px;padding:4px 8px}
+}
+
+.drop{border:2px dashed var(--line);border-radius:11px;padding:22px 16px;text-align:center;
+  cursor:pointer;background:var(--sunk);display:flex;align-items:center;justify-content:center;
+  gap:14px;transition:border-color .15s,background .15s}
+.drop:hover,.drop.over{border-color:var(--dnv);background:var(--card)}
+.dropicon{font-size:26px;color:var(--ink-3);line-height:1}
+.drop.over .dropicon{color:var(--dnv)}
+.droptxt{text-align:left}
+.droptxt b{display:block;font-size:14.5px}
+.droptxt span{display:block;font-size:12px;color:var(--ink-2);margin-top:3px;line-height:1.45}
+
+.etab{width:100%;border-collapse:collapse;font-size:12.5px;min-width:840px;
+  table-layout:fixed}
+.etab th{font-family:var(--mono);font-size:9.5px;letter-spacing:.7px;text-transform:uppercase;
+  color:var(--ink-3);font-weight:500;text-align:center;padding:7px 4px;
+  border-bottom:1px solid var(--line);white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis}
+.etab td{padding:3px 4px;border-bottom:1px solid var(--line-2);vertical-align:middle}
+.etab td input,.etab td select{width:100%;min-width:0;flex:none;font-family:var(--mono);
+  font-size:12.5px;padding:5px 4px;border:1px solid transparent;border-radius:5px;
+  background:transparent;color:var(--ink);text-align:center}
+.etab td select{text-align:center;text-align-last:center}
+.etab td input:hover,.etab td select:hover{border-color:var(--line);background:var(--card)}
+.etab td input:focus,.etab td select:focus{border-color:var(--dnv);
+  background:var(--card);outline:none}
+.etab td.ro{font-family:var(--mono);text-align:center;color:var(--ink-2);
+  white-space:nowrap}
+.etab .del{border:none;background:none;color:var(--ink-3);cursor:pointer;font-size:14px;
+  padding:2px 6px;font-family:var(--mono)}
+.etab .del:hover{color:var(--bad)}
+
+/* screening scatter */
+.scrwrap{position:relative;width:100%;max-width:820px;margin:0 auto;min-height:260px}
+body.wide .scrwrap{max-width:820px}
+#scrCanvas{display:block;border-radius:8px;max-width:100%}
+.scrkey{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px;font-family:var(--mono);
+  font-size:10.5px;color:var(--ink-2);justify-content:center}
+.scrkey span{display:flex;align-items:center;gap:5px}
+.scrkey i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.zimm{color:var(--bad)} .zsch{color:var(--warn)} .zmon{color:var(--dnv)} .zok{color:var(--ok)}
+
+/* method summary rows */
+.mlist{display:flex;flex-direction:column}
+.mrow{display:flex;align-items:flex-start;gap:11px;padding:13px 0;
+  border-bottom:1px solid var(--line-2);cursor:pointer;background:none;border-left:none;
+  border-right:none;border-top:none;width:100%;text-align:left;font-family:var(--sans);
+  color:var(--ink)}
+.mrow:last-child{border-bottom:none}
+.mrow:hover{background:var(--sunk)}
+.mrow .mdot{width:9px;height:9px;border-radius:2px;flex:none;margin-top:5px}
+.mrow .mmid{flex:1;min-width:0;display:block}
+.mrow .mname{display:block;font-size:13.5px;font-weight:600;line-height:1.3}
+.mrow .mtag{display:inline-block;font-family:var(--mono);font-size:8.5px;letter-spacing:.5px;
+  text-transform:uppercase;padding:2px 6px;border-radius:4px;border:1px solid currentColor;
+  font-weight:600;margin-top:6px}
+.mrow .msub{display:block;font-size:11.5px;color:var(--ink-2);margin-top:6px;line-height:1.45}
+.mrow .mval{font-family:var(--mono);font-size:13px;text-align:right;flex:none;
+  font-variant-numeric:tabular-nums;padding-top:1px}
+.mrow .mval i{display:block;font-style:normal;font-size:10.5px;color:var(--ink-3);margin-top:1px}
+.mrow .mgo{font-family:var(--mono);font-size:14px;color:var(--ink-3);flex:none;
+  padding-top:1px}
+.mrow.supp{opacity:.82}
+.mrow.out{opacity:.5}
+.tag-req{color:var(--ok)} .tag-sup{color:var(--dnv)} .tag-na{color:var(--ink-3)}
+
+/* per-method conclusion */
+.concl{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--ink-3);
+  border-radius:0 12px 12px 0;padding:14px 16px}
+.concl.ok{border-left-color:var(--ok)} .concl.warn{border-left-color:var(--warn)}
+.concl.bad{border-left-color:var(--bad)} .concl.na{border-left-color:var(--ink-3)}
+.concl h4{margin:0 0 6px;font-size:15px;font-weight:650}
+.concl p{margin:0;font-size:13.5px;line-height:1.6;color:var(--ink-2)}
+.concl p + p{margin-top:8px}
+.concl .cnum{font-family:var(--mono);color:var(--ink);font-weight:600}
+
+/* decision panel */
+.decision{border-radius:13px;padding:17px 18px;color:var(--hero-fg);background:var(--hero-bg)}
+.decision.ok{background:var(--ok)} .decision.warn{background:var(--warn)}
+.decision.bad{background:var(--bad)}
+.dtop{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.dlab{font-family:var(--mono);font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;
+  opacity:.82}
+.dbig{font-family:var(--mono);font-size:34px;font-weight:650;line-height:1.08;margin-top:3px;
+  font-variant-numeric:tabular-nums}
+.dnote{font-family:var(--mono);font-size:11.5px;opacity:.88;margin-top:5px}
+.dact{font-size:14.5px;font-weight:650;line-height:1.4;max-width:340px;
+  background:rgba(255,255,255,.16);padding:11px 13px;border-radius:9px}
+.dact span{display:block;font-weight:400;font-size:12.5px;opacity:.92;margin-top:5px}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:11px;
+  margin-top:15px;padding-top:14px;border-top:1px solid rgba(255,255,255,.26)}
+.dcell .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.9px;text-transform:uppercase;
+  opacity:.8}
+.dcell .v{font-family:var(--mono);font-size:17px;font-variant-numeric:tabular-nums;margin-top:2px}
+.dcell .s{font-family:var(--mono);font-size:10.5px;opacity:.82;margin-top:2px}
+
+/* comparison bars — real HTML so type never scales with the container */
+.barchart{position:relative;margin:6px 0 4px;padding-top:16px}
+.brow{margin-bottom:11px}
+.brow:last-child{margin-bottom:2px}
+.bhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+  font-family:var(--mono);font-size:11.5px;margin-bottom:4px}
+.bhead .bk{color:var(--ink-2)}
+.bhead .bv{color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.btrack{height:13px;border-radius:4px;background:var(--track);overflow:hidden}
+.bfill{height:100%;border-radius:4px;opacity:.88;transition:width .12s ease}
+.bmark{position:absolute;top:14px;bottom:0;width:1.5px;background:var(--bad);opacity:.6}
+.bmlab{position:absolute;top:0;font-family:var(--mono);font-size:10.5px;color:var(--bad);
+  white-space:nowrap}
+
+/* geometry tab: controls beside the visuals */
+.geo{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin-top:18px}
+body.wide .geo{grid-template-columns:minmax(330px,390px) minmax(0,1fr);
+  gap:14px;align-items:start}
+body.wide .geo-ctl{position:sticky;top:14px}
+.geo-fig{display:grid;gap:11px;min-width:0}
+body.wide .geo-fig{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+body.wide .geo-fig .plan{grid-column:1/-1}
+.readout{position:sticky;top:0;z-index:25;background:var(--hero-bg);color:var(--hero-fg);
+  border-radius:12px;padding:14px 16px;margin-bottom:11px}
+body.wide .readout{position:static}
+.readout .lab{font-family:var(--mono);font-size:10px;letter-spacing:1.2px;
+  text-transform:uppercase;opacity:.8}
+.readout .big{font-family:var(--mono);font-size:31px;font-weight:600;line-height:1.1;
+  font-variant-numeric:tabular-nums;margin-top:2px}
+.readout .sub2{font-family:var(--mono);font-size:11.5px;opacity:.88;margin-top:5px}
+.gauge{margin-top:11px}
+.delta td.dv{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+
+/* toolbar + theme picker */
+.tools{display:flex;align-items:center;gap:9px;flex:none}
+.palwrap{position:relative}
+.palbtn{width:38px;height:36px;border:1px solid var(--line);border-radius:9px;
+  background:var(--card);color:var(--ink-2);cursor:pointer;display:flex;
+  align-items:center;justify-content:center;padding:0}
+.palbtn[aria-expanded=true]{background:var(--hero-bg);color:var(--hero-fg);
+  border-color:var(--hero-bg)}
+.palmenu{position:absolute;right:0;top:calc(100% + 7px);z-index:40;min-width:172px;
+  background:var(--card);border:1px solid var(--line);border-radius:11px;padding:6px;
+  box-shadow:0 10px 26px rgba(0,0,0,.16)}
+.palmenu[hidden]{display:none}
+.palhead{font-family:var(--mono);font-size:9.5px;letter-spacing:1px;text-transform:uppercase;
+  color:var(--ink-3);padding:6px 8px 7px}
+.palmenu button{display:flex;align-items:center;gap:9px;width:100%;border:none;
+  background:transparent;color:var(--ink);font-family:var(--sans);font-size:13.5px;
+  padding:8px 8px;border-radius:7px;cursor:pointer;text-align:left}
+.palmenu button:hover{background:var(--sunk)}
+.palmenu button[aria-current=true]{background:var(--sunk);font-weight:650}
+.palmenu button::before{content:"";flex:none;width:34px;height:15px;border-radius:4px;
+  border:1px solid var(--line);background:var(--swatch)}
+
+.tabs{display:flex;flex-wrap:wrap;gap:6px;padding:13px 0 5px;
+  max-width:100%;overflow:visible}
+.tab{flex:0 1 auto;min-width:0;font-family:var(--mono);font-size:12.5px;
+  padding:9px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);
+  color:var(--ink-2);cursor:pointer;white-space:nowrap;border-bottom-width:2px}
+@media (max-width:560px){
+  .tabs{gap:5px}
+  .tab{font-size:11.5px;padding:8px 9px;letter-spacing:-.2px}
+}
+@media (max-width:380px){
+  .tab{font-size:11px;padding:7px 8px}
+}
+.tab[aria-selected=true]{background:var(--hero-bg);border-color:var(--hero-bg);color:var(--hero-fg)}
+.tab[data-a]{border-bottom-color:var(--line)}
+.tab[data-a="orig"][aria-selected=true]{border-bottom-color:var(--orig)}
+.tab[data-a="mod"][aria-selected=true]{border-bottom-color:var(--mod)}
+.tab[data-a="rs"][aria-selected=true]{border-bottom-color:var(--rs)}
+.tab[data-a="dnv"][aria-selected=true]{border-bottom-color:var(--dnv)}
+.tab[data-a="api"][aria-selected=true]{border-bottom-color:var(--api)}
+
+.pane{display:none}
+.pane.on{display:block}
+section{margin-top:18px}
+.legend{font-family:var(--mono);font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 9px 1px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;
+  overflow:hidden}
+.card + .card{margin-top:11px}
+.card h3{margin:0 0 5px;font-size:15.5px;font-weight:650}
+.card p.d{margin:0 0 12px;font-size:13px;color:var(--ink-2);line-height:1.6}
+svg{width:100%;max-width:100%;height:auto;display:block;overflow:visible}
+body.wide .figwrap{max-width:560px;margin:0 auto}
+.geo-fig svg{max-width:460px;margin:0 auto}
+
+/* hero readout */
+.hero{border-radius:12px;padding:15px 17px;color:var(--hero-fg);background:var(--hero-bg);
+  display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap}
+.hero.ok{background:var(--ok)} .hero.warn{background:var(--warn)} .hero.bad{background:var(--bad)}
+.hero .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:1.2px;
+  text-transform:uppercase;opacity:.82}
+.hero .big{font-family:var(--mono);font-size:29px;font-weight:600;
+  font-variant-numeric:tabular-nums;line-height:1.15;margin-top:2px}
+.hero .side{font-family:var(--mono);font-size:12px;text-align:right;opacity:.9;line-height:1.6}
+
+/* inputs */
+.grid2{display:grid;grid-template-columns:1fr;gap:0}
+body.wide .grid2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0 34px}
+.frow{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line-2)}
+.frow label{flex:1 1 auto;min-width:0;font-size:13.5px;line-height:1.3}
+.frow label small{display:block;font-family:var(--mono);font-size:10.5px;color:var(--ink-3)}
+input[type=number],select,textarea{font-family:var(--mono);font-size:15px;padding:8px 10px;
+  border:1px solid var(--line);border-radius:8px;background:var(--sunk);color:var(--ink);
+  appearance:none;-webkit-appearance:none}
+input[type=number],input.txtin{width:108px;flex:none;text-align:right}
+input.txtin{font-family:var(--mono);font-size:15px;padding:8px 10px;
+  border:1px solid var(--line);border-radius:8px;background:var(--sunk);color:var(--ink)}
+select{width:108px;flex:none;text-align:right;text-align-last:right}
+select option{text-align:right;direction:ltr}
+textarea{width:100%;min-height:96px;font-size:13px;line-height:1.7;resize:vertical}
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+input[type=number]{-moz-appearance:textfield}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2.5px solid var(--dnv);
+  outline-offset:1px}
+.unit{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);width:30px;flex:none}
+.btn{font-family:var(--mono);font-size:12.5px;padding:9px 14px;border-radius:8px;
+  border:1px solid var(--hero-bg);background:var(--hero-bg);color:var(--hero-fg);cursor:pointer}
+.btn.ghost{background:var(--card);color:var(--ink);border-color:var(--line)}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+
+/* sliders */
+.ctl{padding:12px 0 3px;border-top:1px solid var(--line-2)}
+.ctl:first-child{border-top:none;padding-top:3px}
+.ctl .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.ctl .name{font-size:13.5px;font-weight:600}
+.ctl .val{font-family:var(--mono);font-size:13.5px;font-variant-numeric:tabular-nums}
+.ctl .hint{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);margin-top:3px}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;background:transparent;
+  height:30px;margin:0;display:block}
+input[type=range]::-webkit-slider-runnable-track{height:5px;border-radius:3px;background:var(--line)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;
+  border-radius:50%;background:#fff;border:2.5px solid var(--ink);margin-top:-10.5px;
+  box-shadow:0 1px 3px rgba(20,37,44,.22)}
+input[type=range]::-moz-range-track{height:5px;border-radius:3px;background:var(--line)}
+input[type=range]::-moz-range-thumb{width:23px;height:23px;border-radius:50%;background:#fff;
+  border:2.5px solid var(--ink)}
+
+/* tables */
+table{width:100%;max-width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+th,td{text-align:left;padding:9px 0;border-bottom:1px solid var(--line-2);vertical-align:top;
+  overflow-wrap:anywhere}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.9px;text-transform:uppercase;
+  color:var(--ink-3);font-weight:500}
+td.n{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums;
+  white-space:nowrap;overflow-wrap:normal}
+tr:last-child td{border-bottom:none}
+.sw{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:7px}
+
+/* calculation panel */
+details.calc{margin-top:12px;background:var(--sunk);border:1px solid var(--line);
+  border-radius:10px;padding:0 14px}
+details.calc summary{padding:12px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.8px;
+  text-transform:uppercase;color:var(--ink-2);cursor:pointer;list-style:none;
+  display:flex;justify-content:space-between;align-items:center}
+details.calc summary::-webkit-details-marker{display:none}
+details.calc summary::after{content:"show";font-size:10.5px;color:var(--ink-3)}
+details.calc[open] summary::after{content:"hide"}
+details.calc .steps{padding:2px 0 14px}
+.step{padding:11px 0;border-top:1px dashed var(--line)}
+.step:first-child{border-top:none}
+.step .lb{font-family:var(--mono);font-size:10px;letter-spacing:.9px;text-transform:uppercase;
+  color:var(--ink-3)}
+.step .sym{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);margin-top:4px;
+  overflow-wrap:anywhere}
+.step .sub{font-family:var(--mono);font-size:12.5px;color:var(--accent);margin-top:4px;
+  overflow-wrap:anywhere}
+.step .res{font-family:var(--mono);font-size:14px;font-weight:650;margin-top:5px;
+  font-variant-numeric:tabular-nums}
+.step.final{background:var(--card);margin:0 -14px;padding:12px 14px;border-radius:8px;
+  border-top:1px solid var(--line)}
+
+.note{font-size:12.5px;line-height:1.65;color:var(--ink-2);margin:12px 0 0;
+  padding:11px 13px;border-left:3px solid var(--line);background:var(--sunk);
+  border-radius:0 9px 9px 0}
+.note.warn{border-color:var(--warn);background:var(--warn-bg);color:var(--warn-fg)}
+.note.bad{border-color:var(--bad);background:var(--bad-bg);color:var(--bad-fg)}
+.use{margin-top:10px}
+.use dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.8px;text-transform:uppercase;
+  color:var(--ink-3);margin-top:13px}
+.use dt:first-child{margin-top:0}
+.use dd{margin:4px 0 0;font-size:13.5px;line-height:1.6}
+footer{margin-top:28px;font-family:var(--mono);font-size:10.5px;color:var(--ink-3);
+  text-align:center;line-height:1.9}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div>
+    <h1>Corroded Pipeline Fit For Service Assessment</h1>
+    <div class="sub">B31G · Modified B31G · RSTRENG · DNV RP-F101 · API 579</div>
+  </div>
+  <div class="tools">
+    <div class="viewtog" role="group" aria-label="Layout width">
+      <button id="vwMob" aria-pressed="false" data-tip="Single narrow column, sized for a phone">Mobile</button>
+      <button id="vwDesk" aria-pressed="false" data-tip="Full page width with side-by-side panels">Desktop</button>
+    </div>
+    <div class="palwrap">
+      <button class="palbtn" id="palBtn" aria-label="Colour theme" aria-expanded="false" data-tip="Change the colour theme">
+        <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true">
+          <path d="M12 2.5c-5.3 0-9.5 4-9.5 9.2 0 5.3 4.2 9.3 9.5 9.3 1 0 1.8-.8 1.8-1.8
+                   0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.1 0-1 .8-1.8 1.8-1.8h2.1c3 0 5.3-2.3
+                   5.3-5.3 0-4.6-4.4-7.3-10-7.3z"
+                fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <circle cx="7.3" cy="12.2" r="1.35" fill="currentColor"/>
+          <circle cx="9.9" cy="8.1" r="1.35" fill="currentColor"/>
+          <circle cx="14.6" cy="7.6" r="1.35" fill="currentColor"/>
+          <circle cx="17.8" cy="10.6" r="1.35" fill="currentColor"/>
+        </svg>
+      </button>
+      <div class="palmenu" id="palMenu" hidden>
+        <div class="palhead">Colour theme</div>
+        <button data-t="" data-tip="Cool blue" data-sw="#E9EFF5,#1B4F8C,#C2571F">Azure</button>
+        <button data-t="t-verde" data-tip="Forest green" data-sw="#EAF2EC,#1B5E3F,#C2571F">Verde</button>
+        <button data-t="t-crimson" data-tip="Deep red" data-sw="#F4ECEB,#9B2C2C,#24597F">Crimson</button>
+        <button data-t="t-violet" data-tip="Indigo purple" data-sw="#EFEDF6,#4C3A8C,#BF5A22">Violet</button>
+        <button data-t="t-carbon" data-tip="Dark" data-sw="#12171A,#3FBF98,#F0873D">Carbon</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="tabs" role="tablist">
+  <button class="tab" role="tab" data-p="cmp" aria-selected="true" data-tip="All methods side by side, with the governing allowable pressure and ERF">Comparison</button>
+  <button class="tab" role="tab" data-p="inp" data-tip="Pipe geometry, material grades, pressure and the flaw dimensions">Inputs</button>
+  <button class="tab" role="tab" data-p="prof" data-tip="River-bottom depth profile — feeds RSTRENG and API 579 Level 2">Profile</button>
+  <button class="tab" role="tab" data-p="geo" data-tip="Watch depth, length and width move the failure pressure in real time">Geometry Impact</button>
+  <button class="tab" role="tab" data-p="scr" data-tip="Plot thousands of ILI features against the acceptance envelope and filter the actionable ones">Screening</button>
+  <button class="tab" role="tab" data-p="orig" data-a="orig" data-tip="2/3 dL parabolic area, flow stress 1.1 × SMYS, rectangular above z = 20">B31G Original</button>
+  <button class="tab" role="tab" data-p="mod" data-a="mod" data-tip="0.85 dL area, flow stress SMYS + 10 ksi — the default screening method">Mod 31G</button>
+  <button class="tab" role="tab" data-p="rs" data-a="rs" data-tip="Effective area — searches every subsection of the thickness profile">RSTRENG</button>
+  <button class="tab" role="tab" data-p="dnv" data-a="dnv" data-tip="Part A and Part B — keyed off SMTS with calibrated safety factors">DNV RP-F101</button>
+  <button class="tab" role="tab" data-p="api" data-a="api" data-tip="Fitness for service — remaining strength factor against RSFa = 0.90">API-579 L1 &amp; L2</button>
+  <button class="tab" role="tab" data-p="guide" data-tip="Which method fits which situation, and where they all break down">Guide</button>
+</div>
+
+<!-- ============ COMPARE ============ -->
+<div class="pane on" id="p-cmp">
+  <section>
+    <div class="decision" id="decision">
+      <div class="dtop">
+        <div>
+          <div class="dlab">Safe operating pressure for this anomaly</div>
+          <div class="dbig" id="dPress">&mdash;</div>
+          <div class="dnote" id="dBasis"></div>
+        </div>
+        <div class="dact" id="dAction"></div>
+      </div>
+      <div class="dgrid" id="dGrid"></div>
+    </div>
+    <div class="note" id="dCaveat"></div>
+  </section>
+  <section>
+    <p class="legend">Method summaries — tap any row</p>
+    <div class="card" style="padding:6px 14px">
+      <div class="mlist" id="mSummary"></div>
+    </div>
+  </section>
+  <section>
+    <p class="legend">Method detail</p>
+    <div class="hero" id="cmpHero">
+      <div><div class="lab">Governing allowable pressure</div><div class="big" id="cmpBig">—</div></div>
+      <div class="side" id="cmpSide"></div>
+    </div>
+  </section>
+  <section>
+    <p class="legend">Every method, same feature</p>
+    <div class="card">
+      <div class="barchart" id="cmpChart"></div>
+      <table id="cmpTable"></table>
+      <div class="note" id="cmpNote"></div>
+      <details class="calc"><summary>How the governing value was picked</summary>
+        <div class="steps" id="cmpSteps"></div></details>
+    </div>
+  </section>
+  <section>
+    <p class="legend">Spread</p>
+    <div class="card"><h3>Why they disagree</h3><p class="d" id="spreadTxt"></p></div>
+  </section>
+</div>
+
+<!-- ============ INPUTS ============ -->
+<div class="pane" id="p-inp">
+  <section>
+    <p class="legend">Reading the badges</p>
+    <div class="card">
+      <p class="d">Each input is tagged with the methods that consume it. An input tagged
+        <b>All</b> is required no matter which method you rely on; the rest only matter for the
+        codes named. Leaving an unused input at its default changes nothing in the tabs that
+        ignore it.</p>
+      <div class="reqkey req">
+        <b class="all">All</b><b class="orig">B31G</b><b class="mod">Mod B31G</b>
+        <b class="rs">RSTRENG</b><b class="dnv">DNV</b><b class="api">API 579</b>
+      </div>
+    </div>
+  </section>
+  <section>
+    <p class="legend">Pipe and pressure</p>
+    <div class="card"><div class="grid2">
+      <div>
+        <div class="frow"><label>Outside diameter, D<span class="req"><b class="all">All</b></span></label>
+          <input type="number" id="iD" value="8.625" step="0.001" inputmode="decimal"><span class="unit">in</span></div>
+        <div class="frow"><label>Nominal wall, t<span class="req"><b class="all">All</b></span></label>
+          <input type="number" id="iT" value="0.322" step="0.001" inputmode="decimal"><span class="unit">in</span></div>
+        <div class="frow"><label>SMYS<span class="req"><b class="orig">B31G</b><b class="mod">Mod B31G</b><b class="rs">RSTRENG</b><b class="api">API 579</b></span></label>
+          <input type="number" id="iS" value="52000" step="1000" inputmode="numeric"><span class="unit">psi</span></div>
+        <div class="frow"><label>SMTS / UTS <small>DNV only — the other methods use SMYS</small><span class="req"><b class="dnv">DNV</b></span></label>
+          <input type="number" id="iU" value="66000" step="1000" inputmode="numeric"><span class="unit">psi</span></div>
+      </div>
+      <div>
+        <div class="frow"><label>Regulatory basis<small>which codes set the safe pressure &mdash; pipelines only</small><span class="req"><b class="all">All</b></span></label>
+          <select id="iJur"><option value="us" selected>US onshore &mdash; 49 CFR</option>
+            <option value="dnv">Offshore &mdash; DNV</option>
+            <option value="all">All codes &mdash; compare</option></select><span class="unit"></span></div>
+        <div class="frow"><label>Operating pressure<small>MAOP / MOP — drives every ERF and verdict</small><span class="req"><b class="all">All</b></span></label>
+          <input type="number" id="iP" value="900" step="25" inputmode="decimal"><span class="unit">psi</span></div>
+        <div class="frow"><label>Design factor, F<small>not used by DNV Part A</small><span class="req"><b class="orig">B31G</b><b class="mod">Mod B31G</b><b class="rs">RSTRENG</b><b class="dnv">DNV Part B</b><b class="api">API 579</b></span></label>
+          <select id="iF"><option value="0.72" selected>0.72</option><option value="0.60">0.60</option>
+            <option value="0.50">0.50</option><option value="0.40">0.40</option>
+            <option value="0.80">0.80</option></select><span class="unit"></span></div>
+        <div class="frow"><label>Future corrosion allowance, FCA<span class="req"><b class="api">API 579</b></span></label>
+          <input type="number" id="iFCA" value="0.020" step="0.005" inputmode="decimal"><span class="unit">in</span></div>
+        <div class="frow"><label>MAWP basis<small>how API 579 gets its reference pressure</small><span class="req"><b class="api">API 579</b></span></label>
+          <select id="iMawpMode"><option value="calc" selected>Computed</option>
+            <option value="user">Entered</option></select><span class="unit"></span></div>
+        <div class="frow"><label>MAWP, if entered<small>design or nameplate value; ignored when computed</small><span class="req"><b class="api">API 579</b></span></label>
+          <input type="number" id="iMawpVal" value="1200" step="25" inputmode="decimal"><span class="unit">psi</span></div>
+        <div class="frow"><label>Corrosion rate<small>0 disables remaining life</small><span class="req"><b class="all">All</b></span></label>
+          <input type="number" id="iCR" value="4" step="0.5" inputmode="decimal"><span class="unit">mpy</span></div>
+        <div class="frow"><label>ILI sizing tolerance<small>&plusmn; on depth, e.g. 10% wt at 80% confidence</small><span class="req"><b class="all">All</b></span></label>
+          <input type="number" id="iTol" value="10" step="1" inputmode="decimal"><span class="unit">% wt</span></div>
+      </div>
+    </div></div>
+  </section>
+  <section>
+    <p class="legend">Feature — single-value methods</p>
+    <div class="card">
+      <div class="ctl"><div class="top"><span class="name">Maximum depth, d</span>
+        <span class="val" id="vD"></span></div>
+        <span class="req"><b class="all">All</b></span>
+        <input type="range" id="rD" min="1" max="90" step="1" value="45">
+        <div class="hint" id="hD"></div></div>
+      <div class="ctl"><div class="top"><span class="name">Axial length, L</span>
+        <span class="val" id="vL"></span></div>
+        <span class="req"><b class="orig">B31G</b><b class="mod">Mod B31G</b><b class="dnv">DNV</b><b class="api">API 579 L1</b></span>
+        <input type="range" id="rL" min="0.25" max="36" step="0.25" value="4">
+        <div class="hint" id="hL"></div></div>
+      <div class="note">Width is not an input to any method here. All four assume the metal loss
+        extends far enough circumferentially that no adjacent full-thickness steel shares the
+        hoop load.</div>
+    </div>
+  </section>
+  <section>
+    <p class="legend">DNV Part A partial safety factors</p>
+    <div class="card">
+      <p class="d">Part A applies calibrated factors tied to safety class and sizing accuracy.
+        These defaults sit near typical ILI relative-depth values.
+        <b>Confirm against your edition of RP-F101 before relying on the result.</b></p>
+      <div class="grid2"><div>
+        <div class="frow"><label>&gamma;<sub>m</sub><small>model / safety class</small><span class="req"><b class="dnv">DNV Part A</b></span></label>
+          <input type="number" id="iGm" value="0.74" step="0.01" inputmode="decimal"><span class="unit"></span></div>
+        <div class="frow"><label>&gamma;<sub>d</sub><small>depth factor</small><span class="req"><b class="dnv">DNV Part A</b></span></label>
+          <input type="number" id="iGd" value="1.20" step="0.01" inputmode="decimal"><span class="unit"></span></div>
+      </div><div>
+        <div class="frow"><label>&epsilon;<sub>d</sub><small>fractile</small><span class="req"><b class="dnv">DNV Part A</b></span></label>
+          <input type="number" id="iEd" value="1.00" step="0.05" inputmode="decimal"><span class="unit"></span></div>
+        <div class="frow"><label>StD[d/t]<small>sizing std dev</small><span class="req"><b class="dnv">DNV Part A</b></span></label>
+          <input type="number" id="iStD" value="0.08" step="0.01" inputmode="decimal"><span class="unit"></span></div>
+      </div></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ PROFILE ============ -->
+<div class="pane" id="p-prof">
+  <section>
+    <p class="legend">River-bottom profile</p>
+    <div class="card">
+      <h3>Depth points along the axis</h3>
+      <p class="d">RSTRENG and API 579 Level 2 work from a thickness profile rather than a single
+        depth. Enter depths as <b>% of wall</b>, evenly spaced, running axially. Commas, spaces,
+        or new lines all work.</p>
+      <div class="frow" style="max-width:420px"><label>Point spacing<small>even axial spacing between depth readings</small><span class="req"><b class="rs">RSTRENG</b><b class="api">API 579 L2</b></span></label>
+        <input type="number" id="iDx" value="0.25" step="0.05" inputmode="decimal"><span class="unit">in</span></div>
+      <textarea id="iProf" spellcheck="false"></textarea>
+      <div class="btnrow">
+        <button class="btn" id="bSync" data-tip="Generate a smooth river-bottom profile matching the depth and length sliders">Rebuild from d and L</button>
+        <button class="btn ghost" id="bFlat" data-tip="Constant-depth profile — RSTRENG will then match Modified B31G">Make it rectangular</button>
+      </div>
+      <div class="note" id="profNote"></div>
+    </div>
+  </section>
+  <section>
+    <p class="legend">What you entered</p>
+    <div class="card">
+      <div class="figwrap"><svg id="profChart" viewBox="0 0 320 150"></svg></div>
+      <table id="profStats"></table>
+      <details class="calc"><summary>Trapezoidal area accumulation</summary>
+        <div class="steps" id="profSteps"></div></details>
+    </div>
+  </section>
+</div>
+
+<!-- ============ ORIGINAL B31G ============ -->
+<div class="pane" id="p-orig">
+  <section>
+    <div class="hero" id="origHero">
+      <div><div class="lab">Original B31G allowable</div><div class="big" id="origBig">—</div></div>
+      <div class="side" id="origSide"></div>
+    </div>
+  </section>
+  <section>
+    <p class="legend">Conclusion</p>
+    <div class="concl" id="origConcl"></div>
+  </section>
+  <section>
+    <p class="legend">Results</p>
+    <div class="card">
+      <table id="origTable"></table>
+      <details class="calc"><summary>Detailed calculations using actual inputs</summary>
+        <div class="steps" id="origSteps"></div></details>
+    </div>
+  </section>
+  <section>
+    <p class="legend">The area it assumes</p>
+    <div class="card">
+      <h3>Parabolic below z = 20, rectangular above</h3>
+      <p class="d">Original B31G idealizes the flaw as a parabola of area (2/3)dL, then switches
+        abruptly to a full rectangle dL once z exceeds 20. That discontinuity is why long
+        features get suddenly harsher treatment.</p>
+      <div class="figwrap"><svg id="origFig" viewBox="0 0 320 156"></svg></div>
+    </div>
+  </section>
+  <section>
+    <p class="legend">Guide</p>
+    <div class="card"><dl class="use">
+      <dt>Reach for it</dt>
+      <dd>Legacy comparison, or where a procedure or consent order names B31G specifically.
+        It is the most conservative method in this tool and nobody will argue you were
+        optimistic.</dd>
+      <dt>Skip it</dt>
+      <dd>Essentially all routine work. Modified B31G supersedes it and is better calibrated to
+        the same burst-test database.</dd>
+      <dt>Watch for</dt>
+      <dd>The z = 20 cutoff. Cross it and the assumed area jumps from (2/3)dL to dL with no
+        transition — a feature can get materially worse from a small length increase.</dd>
+    </dl></div>
+  </section>
+</div>
+
+<!-- ============ MODIFIED B31G ============ -->
+<div class="pane" id="p-mod">
+  <section>
+    <div class="hero" id="modHero">
+      <div><div class="lab">Modified B31G allowable</div><div class="big" id="modBig">—</div></div>
+      <div class="side" id="modSide"></div>
+    </div>
+  </section>
+  <section>
+    <p class="legend">Conclusion</p>
+    <div class="concl" id="modConcl"></div>
+  </section>
+  <section>
+    <p class="legend">Results</p>
+    <div class="card">
+      <table id="modTable"></table>
+      <details class="calc" open><summary>Detailed calculations using actual inputs</summary>
+        <div class="steps" id="modSteps"></div></details>
+    </div>
+  </section>
+  <section>
+    <p class="legend">Thresholds at this length</p>
+    <div class="card">
+      <h3>What depth triggers what</h3>
+      <table id="modThresh"></table>
+      <details class="calc"><summary>Back-solving the allowable depth</summary>
+        <div class="steps" id="modBack"></div></details>
+    </div>
+  </section>
+  <section>
+    <p class="legend">Sensitivity</p>
+    <div class="card">
+      <h3>P<sub>F</sub> against length, one curve per depth</h3>
+      <p class="d">Your feature is the marker. The red line is operating pressure; the dashed
+        amber line is the repair trigger at operating ÷ F.</p>
+      <div class="figwrap"><svg id="modFig" viewBox="0 0 320 216"></svg></div>
+    </div>
+  </section>
+  <section>
+    <p class="legend">Guide</p>
+    <div class="card"><dl class="use">
+      <dt>Reach for it</dt>
+      <dd>First-pass screening of an ILI run, and any case where all you have is max depth and
+        axial length. This is the default method for US onshore transmission and what a
+        regulator expects to see.</dd>
+      <dt>Skip it</dt>
+      <dd>When the anomaly is driving an expensive dig you would rather avoid. On a long
+        irregular feature it leaves real margin on the table — go to RSTRENG with a profile.</dd>
+      <dt>Watch for</dt>
+      <dd>The 0.85 dL area is a rectangle. A feature that is deep at one spot and shallow
+        elsewhere gets charged as if it were deep along its whole length. Also note there is no
+        z cutoff here, unlike the original.</dd>
+    </dl></div>
+  </section>
+</div>
+
+<!-- ============ RSTRENG ============ -->
+<div class="pane" id="p-rs">
+  <section>
+    <div class="hero" id="rsHero">
+      <div><div class="lab">RSTRENG effective area allowable</div><div class="big" id="rsBig">—</div></div>
+      <div class="side" id="rsSide"></div>
+    </div>
+  </section>
+  <section>
+    <p class="legend">Conclusion</p>
+    <div class="concl" id="rsConcl"></div>
+  </section>
+  <section>
+    <p class="legend">Governing subsection</p>
+    <div class="card">
+      <h3>The algorithm searches every subsection</h3>
+      <p class="d">It evaluates each contiguous span of the profile as if that span were the whole
+        flaw, and reports the lowest failure pressure found. The shaded span governs — it is often
+        <b>not</b> the full length of the feature.</p>
+      <div class="figwrap"><svg id="rsFig" viewBox="0 0 320 168"></svg></div>
+      <table id="rsTable"></table>
+      <details class="calc"><summary>Detailed calculations using actual inputs</summary>
+        <div class="steps" id="rsSteps"></div></details>
+    </div>
+  </section>
+  <section>
+    <p class="legend">Runners-up</p>
+    <div class="card">
+      <h3>The next closest subsections</h3>
+      <p class="d">If these cluster near the governing value, the answer is robust. If one is far
+        below the rest, the profile resolution around that spot is worth checking.</p>
+      <table id="rsRunners"></table>
+    </div>
+  </section>
+  <section>
+    <p class="legend">Guide</p>
+    <div class="card"><dl class="use">
+      <dt>Reach for it</dt>
+      <dd>You have a real thickness profile — in-ditch grid measurements, or an ILI file with
+        axial depth sampling. This recovers margin on long irregular corrosion, where B31G sees
+        one long deep box and RSTRENG sees a shallow run with a couple of pits.</dd>
+      <dt>Skip it</dt>
+      <dd>You only have max depth and length. Feeding a rectangle into RSTRENG returns Modified
+        B31G with extra steps and a false sense of rigour.</dd>
+      <dt>Watch for</dt>
+      <dd>Result quality is bounded by profile quality. Coarse spacing smooths out the deep pit
+        that actually governs. The governing subsection shifting between runs is normal.</dd>
+    </dl></div>
+  </section>
+</div>
+
+<!-- ============ DNV ============ -->
+<div class="pane" id="p-dnv">
+  <section>
+    <div class="hero" id="dnvHero">
+      <div><div class="lab">DNV RP-F101 Part A allowable</div><div class="big" id="dnvBig">—</div></div>
+      <div class="side" id="dnvSide"></div>
+    </div>
+  </section>
+  <section>
+    <p class="legend">Conclusion</p>
+    <div class="concl" id="dnvConcl"></div>
+  </section>
+  <section>
+    <p class="legend">Results</p>
+    <div class="card">
+      <table id="dnvTable"></table>
+      <details class="calc"><summary>Detailed calculations using actual inputs</summary>
+        <div class="steps" id="dnvSteps"></div></details>
+      <div class="note warn">Part A folds sizing uncertainty into the answer through
+        &gamma;<sub>d</sub> and StD[d/t]. Part B does not — it is the capacity equation with your
+        own design factor applied, directly comparable to the B31G numbers.</div>
+    </div>
+  </section>
+  <section>
+    <p class="legend">Bulging factors compared</p>
+    <div class="card">
+      <h3>Q against M against M<sub>t</sub></h3>
+      <p class="d">Each method corrects for the remaining ligament bulging outward, and each uses
+        a different curve. DNV's Q keeps climbing where B31G's M flattens, which is one reason
+        the two diverge on long features.</p>
+      <div class="figwrap"><svg id="dnvFig" viewBox="0 0 320 190"></svg></div>
+    </div>
+  </section>
+  <section>
+    <p class="legend">Guide</p>
+    <div class="card"><dl class="use">
+      <dt>Reach for it</dt>
+      <dd>Offshore and DNV-designed systems, where it is the expected method. Cases with combined
+        internal pressure and longitudinal load — F101 has explicit provisions B31G lacks. And
+        when you want sizing uncertainty handled explicitly rather than buried in a blanket
+        safety factor.</dd>
+      <dt>Skip it</dt>
+      <dd>US onshore regulatory work, where B31G and RSTRENG are what reviewers expect. Also skip
+        it on vintage or low-toughness pipe: F101 was calibrated on modern high-toughness line
+        pipe and its use of SMTS assumes ductile, flow-stress-controlled failure.</dd>
+      <dt>Watch for</dt>
+      <dd>It keys off SMTS, not SMYS. Grades with a wide yield-to-tensile spread show a different
+        answer from B31G for reasons unrelated to the flaw geometry. Part A also collapses toward
+        zero as &gamma;<sub>d</sub>(d/t)* approaches 1 — real behaviour, but punishing on deep
+        features.</dd>
+    </dl></div>
+  </section>
+</div>
+
+<!-- ============ API 579 ============ -->
+<div class="pane" id="p-api">
+  <section>
+    <div class="hero" id="apiHero">
+      <div><div class="lab">API 579 Level 1 verdict</div><div class="big" id="apiBig">—</div></div>
+      <div class="side" id="apiSide"></div>
+    </div>
+  </section>
+  <section>
+    <p class="legend">Conclusion</p>
+    <div class="concl" id="apiConcl"></div>
+  </section>
+  <section>
+    <p class="legend">Level 1 &mdash; screening curve</p>
+    <div class="card">
+      <h3>R<sub>t</sub> against &lambda;</h3>
+      <p class="d">API 579 asks a different question. Rather than a burst pressure it returns a
+        <b>remaining strength factor</b> and asks whether it clears RSF<sub>a</sub> = 0.90. Your
+        feature is the dot; on or above the curve passes.</p>
+      <div class="figwrap"><svg id="apiFig" viewBox="0 0 320 200"></svg></div>
+      <table id="apiTable"></table>
+      <details class="calc"><summary>Detailed calculations using actual inputs</summary>
+        <div class="steps" id="apiSteps"></div></details>
+      <div class="note"><b>Where MAWP comes from.</b> API 579 does not produce a burst pressure
+        the way the other methods do &mdash; it produces a remaining strength factor and applies
+        it to a pressure you already have. By default this tool derives that pressure from the
+        design equation, MAWP = 2 &middot; S &middot; t<sub>c</sub> / D with S = F &times; SMYS,
+        because it is the only self-consistent value available from the inputs already on the
+        page. That is a <i>design</i> MAWP on the corroded wall, not your recorded MAWP.
+        If your line has an established MAWP &mdash; from records, a pressure test, or a
+        derating &mdash; switch the basis to <b>Entered</b> on the Inputs tab and type it in.
+        The reduced MAWP then scales from your value instead: MAWP<sub>r</sub> = MAWP &times;
+        RSF / 0.90.</div>
+      <div class="note" id="apiGates"></div>
+    </div>
+  </section>
+  <section>
+    <p class="legend">Level 2 &mdash; effective area</p>
+    <div class="card">
+      <h3>Level 2 assessment on the thickness profile</h3>
+      <p class="d">Level 2 runs the same subsection search as RSTRENG but expresses the answer as
+        an RSF. When Level 1 fails, this is usually where the margin is.</p>
+      <table id="api2Table"></table>
+      <details class="calc"><summary>Detailed calculations using actual inputs</summary>
+        <div class="steps" id="api2Steps"></div></details>
+    </div>
+  </section>
+  <section>
+    <p class="legend">Guide</p>
+    <div class="card"><dl class="use">
+      <dt>Reach for it</dt>
+      <dd>Anything that is not a straight run of pipeline — vessels, tanks, piping, elbows, heads,
+        nozzles. Metal loss near a structural discontinuity. And the case B31G cannot touch:
+        <b>circumferentially oriented</b> metal loss with axial load from settlement, slope
+        movement, or thermal expansion.</dd>
+      <dt>Skip it</dt>
+      <dd>Routine ILI dig screening on a transmission line. Heavier machinery than the job needs,
+        and your regulator expects B31G or RSTRENG anyway.</dd>
+      <dt>Watch for</dt>
+      <dd>FCA is not optional — 579 is built around remaining life, and a zero corrosion allowance
+        quietly assumes the metal loss has stopped. A Level 1 failure is an instruction to go to
+        Level 2, not a condemnation of the pipe.</dd>
+    </dl></div>
+  </section>
+</div>
+
+<!-- ============ GEOMETRY ============ -->
+<div class="pane" id="p-geo">
+  <div class="geo">
+    <div class="geo-ctl">
+      <div class="readout">
+        <div class="lab">Failure pressure, Modified B31G</div>
+        <div class="big" id="geoBig">&mdash;</div>
+        <div class="sub2" id="geoSub"></div>
+        <div class="gauge"><svg id="geoGauge" viewBox="0 0 300 46"></svg></div>
+      </div>
+      <div class="card">
+        <div class="ctl"><div class="top">
+          <span class="name">Depth, d</span><span class="val" id="gvD"></span></div>
+          <input type="range" id="gD" min="1" max="90" step="1" value="45">
+          <div class="hint" id="ghD"></div></div>
+        <div class="ctl"><div class="top">
+          <span class="name">Axial length, L</span><span class="val" id="gvL"></span></div>
+          <input type="range" id="gL" min="0.25" max="36" step="0.25" value="4">
+          <div class="hint" id="ghL"></div></div>
+        <div class="ctl"><div class="top">
+          <span class="name">Circumferential width, W</span><span class="val" id="gvW"></span></div>
+          <input type="range" id="gW" min="2" max="100" step="1" value="30">
+          <div class="hint" id="ghW"></div></div>
+        <div class="note" id="gwMsg"></div>
+      </div>
+      <div class="card">
+        <h3>Nudge each dimension 25%</h3>
+        <p class="d">Same feature, one dimension changed at a time.</p>
+        <table class="delta" id="geoDelta"></table>
+      </div>
+    </div>
+
+    <div class="geo-fig">
+      <div class="card plan">
+        <h3>Looking down at the pipe surface</h3>
+        <p class="d">The block is the real corroded area. The hatched band is what B31G
+          evaluates &mdash; the deepest point smeared across the full circumference, after which
+          the width is discarded.</p>
+        <svg id="geoPlan" viewBox="0 0 320 150"></svg>
+      </div>
+      <div class="card">
+        <h3>Axial slice &mdash; this governs</h3>
+        <p class="d">Hoop stress pulls sideways across this cut. Depth sets the remaining
+          ligament; length sets how far it bulges before tearing.</p>
+        <svg id="geoAxial" viewBox="0 0 320 122"></svg>
+      </div>
+      <div class="card">
+        <h3>Ring slice &mdash; width lives here, and is ignored</h3>
+        <p class="d">Widen the patch and this arc grows. The number above it does not move.</p>
+        <svg id="geoRing" viewBox="0 0 320 136"></svg>
+      </div>
+      <div class="card" style="grid-column:1/-1">
+        <h3>Why width never enters</h3>
+        <p class="d">Hoop stress is twice axial stress in a pressurised cylinder, so the pipe
+          tears along an axial line &mdash; length controls how much the thinned ligament bulges,
+          depth controls how much steel is left to resist. Every method here then assumes the
+          metal loss already wraps far enough that no intact steel beside it shares the load.
+          Width is fixed at its worst case, which is why a narrow groove and a wide patch of the
+          same depth and length return the same answer. Recovering that margin needs API 579 with
+          both longitudinal and circumferential thickness profiles.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SCREENING ============ -->
+<div class="pane" id="p-scr">
+  <section>
+    <div class="hero" id="scrHero">
+      <div><div class="lab">Features requiring action</div><div class="big" id="scrBig">&mdash;</div></div>
+      <div class="side" id="scrSide"></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="legend">Load your pipe tally</p>
+    <div class="card">
+      <div class="drop" id="scrDrop">
+        <div class="dropicon">&#8681;</div>
+        <div class="droptxt"><b>Drop a CSV here</b><span>or tap to choose a file &mdash;
+          .csv, .tsv or .txt. Export from Excel as CSV.</span></div>
+      </div>
+      <input type="file" id="scrFile" accept=".csv,.tsv,.txt,text/csv,text/plain" hidden>
+      <div class="btnrow">
+        <button class="btn ghost" id="scrClear" data-tip="Remove all loaded features">Clear</button>
+        <button class="btn ghost" id="scrExport" data-tip="Download the filtered list as CSV">Export filtered</button>
+      </div>
+      <div class="note" id="scrParse">No features loaded yet.</div>
+      <details class="calc" style="margin-top:10px">
+        <summary>Expected columns, and pasting instead</summary>
+        <div class="steps" style="padding-bottom:14px">
+          <p class="d" style="margin-top:6px">One feature per line. A header row is detected
+            automatically. Required columns are <b>depth</b> and <b>length</b>; <b>id</b> labels
+            the row and <b>surface</b> (int / ext) picks the growth rate. Optional <b>od</b>,
+            <b>wt</b>, <b>smys</b> and <b>maop</b> columns override the global pipe inputs per
+            row, so a tally spanning several segments still screens correctly. Depth is read as
+            % of wall when above 1, as a fraction when at or below 1. Commas or tabs both
+            work.</p>
+          <textarea id="scrData" spellcheck="false" style="min-height:96px"
+            placeholder="id, surface, depth, length&#10;ANOM-001, ext, 42, 3.5&#10;ANOM-002, int, 61, 8.2"></textarea>
+          <div class="btnrow">
+            <button class="btn" id="scrRun" data-tip="Parse and screen the pasted text">Screen pasted text</button>
+          </div>
+          <p class="d" style="margin:12px 0 0">Not ready to load real data yet?
+            <a href="#" id="scrSample" style="color:var(--dnv)">Fill this box with 800 example
+            features</a> to see how the screening behaves.</p>
+        </div>
+      </details>
+      <div class="grid2" style="margin-top:12px">
+        <div class="frow"><label>Internal growth rate<small>applied to ID features</small></label>
+          <input type="number" id="iCRint" value="6" step="0.5" inputmode="decimal"><span class="unit">mpy</span></div>
+        <div class="frow"><label>External growth rate<small>applied to OD and unknown</small></label>
+          <input type="number" id="iCRext" value="3" step="0.5" inputmode="decimal"><span class="unit">mpy</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="legend">Loaded features</p>
+    <details class="calc" id="scrEditWrap">
+      <summary>Defect dimensions &mdash; editable <span id="scrCount"></span></summary>
+      <div class="steps" style="padding-bottom:14px">
+        <p class="d" style="margin-top:6px">Edit any cell to re-screen immediately. Surface drives
+          which growth rate applies. Depth is % of wall.</p>
+        <div style="overflow-x:auto"><table class="etab" id="scrEdit"></table></div>
+        <div class="btnrow">
+          <button class="btn ghost" id="scrPrev" data-tip="Previous page">&larr;</button>
+          <span id="scrPage" style="font-family:var(--mono);font-size:12px;color:var(--ink-2);
+            align-self:center"></span>
+          <button class="btn ghost" id="scrNext" data-tip="Next page">&rarr;</button>
+          <button class="btn ghost" id="scrAdd" data-tip="Add a blank feature row">+ Row</button>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section>
+    <p class="legend">Acceptance envelope</p>
+    <div class="card">
+      <h3>Depth against length, with the boundary curves</h3>
+      <p class="d">Each dot is one feature. The curves are the critical depth at every length for
+        this pipe and pressure &mdash; there is no single optimum point, only a boundary. Anything
+        on or above the red curve is at or past ERF 1.00. The vertical line is the leak/rupture
+        crossover: features to its left perforate before they tear, features to its right rupture.</p>
+      <div class="scrwrap"><canvas id="scrCanvas"></canvas></div>
+      <div class="scrkey" id="scrKey"></div>
+      <div class="note" id="scrHover">Hover a point to identify it.</div>
+    </div>
+  </section>
+
+  <section>
+    <p class="legend">Filter</p>
+    <div class="card">
+      <div class="grid2"><div>
+        <div class="frow"><label>Show</label>
+          <select id="scrZone"><option value="act">Action required</option>
+            <option value="all" selected>Everything</option>
+            <option value="imm">Immediate only</option>
+            <option value="sch">Scheduled only</option>
+            <option value="mon">Monitor only</option></select><span class="unit"></span></div>
+        <div class="frow"><label>Minimum ERF<small>hides anything below this</small></label>
+          <input type="number" id="scrErf" value="0" step="0.05" inputmode="decimal"><span class="unit"></span></div>
+      </div><div>
+        <div class="frow"><label>Failure mode</label>
+          <select id="scrMode"><option value="any" selected>Any</option>
+            <option value="rupture">Rupture only</option>
+            <option value="leak">Leak only</option></select><span class="unit"></span></div>
+        <div class="frow"><label>Surface</label>
+          <select id="scrSurf"><option value="any" selected>Any</option>
+            <option value="int">Internal</option><option value="ext">External</option>
+            <option value="unk">Unspecified</option></select><span class="unit"></span></div>
+        <div class="frow"><label>ID contains</label>
+          <input type="text" id="scrFind" value="" placeholder="text" class="txtin"><span class="unit"></span></div>
+      </div></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="legend">Ranked list &mdash; worst first</p>
+    <div class="card">
+      <table id="scrTable"></table>
+      <div class="note" id="scrMore"></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="legend">How to read it</p>
+    <div class="card">
+      <dl class="use">
+        <dt>Immediate</dt>
+        <dd>ERF at or above 1.00, or depth at or above 80% wall. The allowable pressure has
+          fallen to or below your operating pressure. Reduce pressure or repair &mdash; these are
+          not next-run problems.</dd>
+        <dt>Scheduled</dt>
+        <dd>ERF between 0.90 and 1.00. Under 10% margin remains. Dig these on a plan rather than
+          leaving them to grow into the immediate band.</dd>
+        <dt>Monitor</dt>
+        <dd>ERF between 0.80 and 0.90. Fine today. Worth watching if your growth rate is
+          uncertain or the feature sits in an HCA.</dd>
+        <dt>The crossover line</dt>
+        <dd>Short features perforate while still holding pressure; long ones tear. A cluster of
+          long features near the boundary is a materially worse finding than the same count of
+          short ones, even at identical ERF.</dd>
+        <dt>What this does not do</dt>
+        <dd>Depth and length only, using Modified B31G. It applies no clustering &mdash; two
+          features within 6t that would merge into one longer flaw are screened separately here
+          and will read better than they should. Run the interaction rule on your tally before
+          trusting the ranking.</dd>
+      </dl>
+    </div>
+  </section>
+</div>
+
+<!-- ============ GUIDE ============ -->
+<div class="pane" id="p-guide">
+  <section>
+    <p class="legend">Picking a method</p>
+    <div class="card"><table>
+      <tr><th>Situation</th><th>Method</th></tr>
+      <tr><td>ILI screening, depth and length only</td><td class="n">Mod B31G</td></tr>
+      <tr><td>Detailed profile from a dig</td><td class="n">RSTRENG</td></tr>
+      <tr><td>Long irregular corrosion, need margin back</td><td class="n">RSTRENG</td></tr>
+      <tr><td>Offshore / DNV-designed system</td><td class="n">DNV</td></tr>
+      <tr><td>Pressure plus axial or bending load</td><td class="n">DNV F101 · API 579</td></tr>
+      <tr><td>Circumferential metal loss</td><td class="n">API 579</td></tr>
+      <tr><td>Vessel, tank, or fitting</td><td class="n">API 579</td></tr>
+      <tr><td>Near a weld, nozzle, or discontinuity</td><td class="n">API 579</td></tr>
+      <tr><td>Explicit sizing-uncertainty treatment</td><td class="n">DNV F101 Part A</td></tr>
+      <tr><td>Procedure or consent order names it</td><td class="n">Original B31G</td></tr>
+    </table></div>
+  </section>
+  <section>
+    <p class="legend">Common ground</p>
+    <div class="card">
+      <h3>What all of them share</h3>
+      <p class="d">Every method here is a <b>flow-stress-dependent plastic collapse</b> model. They
+        assume the pipe fails when the remaining ligament yields and tears, which holds for modern
+        ductile line pipe and fails for low-toughness material. None accounts for crack-like flaws,
+        and none uses width.</p>
+      <div class="note bad"><b>Where they all break down:</b> pre-1970 low-frequency ERW,
+        lap-welded, and some vintage seamless. In low-toughness steel, failure can be
+        fracture-controlled rather than collapse-controlled, and every number in this tool is
+        non-conservative. Those cases need a fracture mechanics assessment — API 579 Part 9 or a
+        Level 2 FAD — not a flow-stress method.</div>
+    </div>
+  </section>
+  <section>
+    <p class="legend">Ordering</p>
+    <div class="card">
+      <h3>Expected conservatism</h3>
+      <p class="d">Roughly, most to least conservative on a typical long feature: original B31G,
+        Modified B31G, API 579 Level 1, then RSTRENG and API 579 Level 2 (close cousins, usually
+        landing together). DNV Part B floats depending on the grade's yield-to-tensile ratio.</p>
+      <p class="d">If your ordering comes out differently, that is worth understanding rather than
+        dismissing — it usually means the profile is doing something interesting, or the feature is
+        short enough that the Folias curves have not separated yet.</p>
+    </div>
+  </section>
+</div>
+
+<footer>
+  Screening tool · verify against the governing standard and your organization's integrity procedure
+</footer>
+
+</div>
+
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var D,T,SMYS,SMTS,SFLOW,MAOP,F,FCA,GM,GD,ED,STD,DX,PROF=[];
+var MAWPMODE,MAWPVAL,CR,TOL,JUR;
+var RSFa=0.90;
+
+/* ---------- tabs ---------- */
+var tabs=document.querySelectorAll(".tab");
+Array.prototype.forEach.call(tabs,function(b){
+  b.addEventListener("click",function(){
+    Array.prototype.forEach.call(tabs,function(x){x.setAttribute("aria-selected","false")});
+    b.setAttribute("aria-selected","true");
+    Array.prototype.forEach.call(document.querySelectorAll(".pane"),function(p){
+      p.classList.remove("on")});
+    $("p-"+b.dataset.p).classList.add("on");
+    window.scrollTo(0,0);
+    if(b.dataset.p==="scr"&&typeof drawScatter==="function")
+      requestAnimationFrame(function(){drawScatter()});
+  });
+});
+
+/* ---------- format ---------- */
+function f0(v){return isFinite(v)?Math.round(v).toLocaleString("en-US"):"\u2014"}
+function fx(v,n){return isFinite(v)?v.toFixed(n):"\u2014"}
+function uu(s){return '<span class="uu">'+s+'</span>'}
+function fc(v,n){return isFinite(v)?(+v.toFixed(n)).toLocaleString("en-US",
+  {minimumFractionDigits:n,maximumFractionDigits:n}):"\u2014"}
+
+/* build a calculation panel: rows of {lb, sym, sub, res, final} */
+function steps(el,rows){
+  $(el).innerHTML=rows.map(function(r){
+    return '<div class="step'+(r.final?" final":"")+'">'
+      +'<div class="lb">'+r.lb+'</div>'
+      +(r.sym?'<div class="sym">'+r.sym+'</div>':'')
+      +(r.sub?'<div class="sub">'+r.sub+'</div>':'')
+      +(r.res?'<div class="res">'+r.res+'</div>':'')+'</div>';
+  }).join("");
+}
+
+function readInputs(){
+  D=+$("iD").value||8.625; T=+$("iT").value||0.322;
+  SMYS=+$("iS").value||52000; SMTS=+$("iU").value||66000;
+  MAOP=+$("iP").value||0; F=parseFloat($("iF").value); FCA=+$("iFCA").value||0;
+  GM=+$("iGm").value||0.74; GD=+$("iGd").value||1.2;
+  ED=+$("iEd").value||1.0; STD=+$("iStD").value||0;
+  DX=+$("iDx").value||0.25;
+  MAWPMODE=$("iMawpMode").value; MAWPVAL=+$("iMawpVal").value||0;
+  CR=+$("iCR").value||0; TOL=(+$("iTol").value||0)/100;
+  JUR=$("iJur").value;
+  SFLOW=SMYS+10000;
+  PROF=$("iProf").value.split(/[\s,;]+/).map(parseFloat)
+        .filter(function(v){return isFinite(v)&&v>=0}).map(function(v){return v/100});
+}
+
+/* ---------- bulging factors ---------- */
+function Mmod(z){return z<=50?Math.sqrt(1+0.6275*z-0.003375*z*z):0.032*z+3.3}
+function Morig(z){return Math.sqrt(1+0.8*z)}
+function Qdnv(L){var x=L/Math.sqrt(D*T);return Math.sqrt(1+0.31*x*x)}
+function lam579(s,tc){return 1.285*s/Math.sqrt((D-2*tc)*tc)}
+function Mt579(l){return Math.sqrt(1+0.48*l*l)}
+
+/* ---------- methods ---------- */
+function modB31G(dt,L){
+  if(dt<=0||L<=0)return{Pf:2*SFLOW*T/D,M:1,z:0,num:1,den:1,SF:SFLOW};
+  var z=L*L/(D*T),M=Mmod(z),num=1-0.85*dt,den=1-0.85*dt/M,SF=SFLOW*num/den;
+  return{Pf:2*SF*T/D,M:M,z:z,num:num,den:den,SF:SF};
+}
+function origB31G(dt,L){
+  var Sf=1.1*SMYS,z=L*L/(D*T);
+  if(dt<=0||L<=0)return{Pf:2*Sf*T/D,M:1,z:0,SF:Sf,Sf:Sf,branch:"short"};
+  if(z<=20){var M=Morig(z),num=1-(2/3)*dt,den=1-(2/3)*dt/M,SF=Sf*num/den;
+    return{Pf:2*SF*T/D,M:M,z:z,num:num,den:den,SF:SF,Sf:Sf,branch:"parabolic"};}
+  var SF2=Sf*(1-dt);
+  return{Pf:2*SF2*T/D,M:Infinity,z:z,num:1-dt,den:1,SF:SF2,Sf:Sf,branch:"rectangular"};
+}
+function dnvPartB(dt,L){
+  var Q=Qdnv(L),base=2*T*SMTS/(D-T);
+  if(dt<=0||L<=0)return{P:base,Q:Q,base:base,num:1,den:1};
+  var num=1-dt,den=1-dt/Q;
+  return{P:base*num/den,Q:Q,base:base,num:num,den:den};
+}
+function dnvPartA(dt,L){
+  var Q=Qdnv(L),base=2*T*SMTS/(D-T),dts=dt+ED*STD;
+  var num=1-GD*dts,den=1-GD*dts/Q;
+  return{P:(num<=0||den<=0)?0:GM*base*num/den,Q:Q,base:base,dts:dts,num:num,den:den};
+}
+function effArea(mode,prof){
+  var PR=prof||PROF;
+  var n=PR.length; if(n<2)return null;
+  var cum=[0],tc=T-FCA;
+  for(var k=1;k<n;k++)cum.push(cum[k-1]+(PR[k-1]+PR[k])/2*DX);
+  var all=[],count=0;
+  for(var i=0;i<n-1;i++)for(var j=i+1;j<n;j++){
+    var L=(j-i)*DX,A=(cum[j]-cum[i])*T,A0=L*T,r=A/A0;
+    count++;
+    if(r<=0||r>=1)continue;
+    var M,val;
+    if(mode==="rstreng"){M=Mmod(L*L/(D*T));val=2*(SFLOW*(1-r)/(1-r/M))*T/D;}
+    else{M=Mt579(lam579(L,tc));val=(1-r)/(1-r/M);}
+    all.push({val:val,i:i,j:j,L:L,A:A,A0:A0,ratio:r,M:M});
+  }
+  if(!all.length)return null;
+  all.sort(function(a,b){return a.val-b.val});
+  var b=all[0]; b.count=count; b.runners=all.slice(0,5); b.cum=cum;
+  return b;
+}
+function api579L1(dt,L){
+  var tc=T-FCA,tmm=T*(1-dt),Rt=(tmm-FCA)/tc;
+  var Di=D-2*tc,l=lam579(L,tc),Mt=Mt579(l);
+  var RSF=Rt/(1-(1/Mt)*(1-Rt));
+  var S=F*SMYS, MAWPcalc=2*S*tc/D;
+  var entered=(MAWPMODE==="user"&&MAWPVAL>0);
+  var MAWP=entered?MAWPVAL:MAWPcalc;
+  return{Rt:Rt,lam:l,Mt:Mt,RSF:RSF,MAWP:MAWP,MAWPcalc:MAWPcalc,entered:entered,S:S,Di:Di,
+    MAWPr:RSF>=RSFa?MAWP:MAWP*RSF/RSFa,tmm:tmm,tc:tc};
+}
+/* back-solve Modified B31G allowable d/t for a target failure pressure */
+function allowDt(Ptarget,L){
+  var z=L*L/(D*T),M=Mmod(z),SFt=Ptarget*D/(2*T),r=SFt/SFLOW;
+  if(r>=1)return{dt:NaN,r:r,M:M,SFt:SFt};
+  var x=(1-r)/(0.85*(1-r/M));
+  return{dt:(x>0&&x<1)?x:NaN,r:r,M:M,SFt:SFt};
+}
+
+/* ---------- which codes bind, by regulatory basis ---------- */
+/* binding = sets the safe pressure · supp = computed for reference · else not applicable */
+var SCOPE={
+  us:{orig:1,mod:1,rs:1},
+  dnv:{dnvB:1,dnvA:1},
+  all:{orig:1,mod:1,rs:1,dnvB:1,dnvA:1,api1:1,api2:1}
+};
+var SUPP={
+  us:{api1:1,api2:1},
+  dnv:{orig:1,mod:1,rs:1,api1:1,api2:1},
+  all:{}
+};
+var JURNAME={us:"US onshore, 49 CFR 192/195",dnv:"offshore, DNV RP-F101",
+  all:"all codes, comparison only"};
+var BLURB={
+  orig:"Most conservative. Use where a procedure or order names B31G by number.",
+  mod:"Default screening method for US onshore ILI. Depth and length only.",
+  rs:"Recovers margin from a real thickness profile. Needs profile data.",
+  dnvB:"Capacity equation on SMTS. Offshore and DNV-designed systems.",
+  dnvA:"Adds sizing uncertainty through calibrated partial factors.",
+  api1:"Screening RSF against 0.90. Vessels, fittings, discontinuities.",
+  api2:"Profile-based RSF. Where Level 1 margin is usually recovered."
+};
+function inScope(id){return !!(SCOPE[JUR]||SCOPE.all)[id]}
+function isSupp(id){return !inScope(id)&&!!(SUPP[JUR]||{})[id]}
+function goTab(pid){
+  var b=document.querySelector('.tab[data-p="'+pid+'"]');
+  if(b)b.click();
+}
+
+/* ---------- governing allowable at an arbitrary depth ---------- */
+function grownProfile(add){
+  if(add<=0)return PROF;
+  return PROF.map(function(v){return v>0?Math.min(v+add,0.99):0});
+}
+function governingAllowable(dtX,add,L){
+  dtX=Math.min(dtX,0.99);
+  var vals=[];
+  var pr=grownProfile(add), a=api579L1(dtX,L);
+  if(inScope("mod"))vals.push(modB31G(dtX,L).Pf*F);
+  if(inScope("orig"))vals.push(origB31G(dtX,L).Pf*F);
+  if(inScope("dnvB"))vals.push(dnvPartB(dtX,L).P*F);
+  if(inScope("dnvA")){var pa=dnvPartA(dtX,L).P; if(pa>0)vals.push(pa);}
+  if(inScope("rs")){var r=effArea("rstreng",pr); if(r)vals.push(r.val*F);}
+  if(inScope("api1"))vals.push(a.MAWPr);
+  if(inScope("api2")){var b=effArea("api579",pr);
+    if(b)vals.push(b.val>=RSFa?a.MAWP:a.MAWP*b.val/RSFa);}
+  vals=vals.filter(function(v){return isFinite(v)&&v>0});
+  return vals.length?Math.min.apply(null,vals):NaN;
+}
+/* years until the governing allowable drops to operating pressure */
+function yearsToLimit(dt0,L){
+  if(CR<=0||MAOP<=0)return NaN;
+  if(governingAllowable(dt0,0,L)<=MAOP)return 0;
+  for(var y=0.25;y<=60.001;y+=0.25){
+    var add=(CR/1000)*y/T;
+    if(dt0+add>=0.99)return y;
+    if(governingAllowable(dt0+add,add,L)<=MAOP)return y;
+  }
+  return Infinity;
+}
+
+/* ---------- profile builders ---------- */
+function syncProfile(){
+  readInputs();
+  var d=+$("rD").value/100,L=+$("rL").value,dx=DX;
+  var pad=Math.max(2,Math.round(0.5/dx)),nIn=Math.max(2,Math.round(L/dx)),out=[];
+  for(var k=0;k<pad;k++)out.push(0);
+  for(var k=0;k<=nIn;k++)out.push(Math.round(d*Math.sin(Math.PI*k/nIn)*1000)/10);
+  for(var k=0;k<pad;k++)out.push(0);
+  $("iProf").value=out.join(", ");
+  draw();
+}
+function flatProfile(){
+  readInputs();
+  var d=+$("rD").value,L=+$("rL").value;
+  var nIn=Math.max(1,Math.round(L/DX)),out=[0,0];
+  for(var k=0;k<=nIn;k++)out.push(d);
+  out.push(0,0);
+  $("iProf").value=out.join(", ");
+  draw();
+}
+
+/* ================= MAIN ================= */
+function draw(){
+  readInputs();
+  var dPct=+$("rD").value,L=+$("rL").value,dt=dPct/100;
+  var d=dt*T;
+
+  $("vD").textContent=dPct+"% wt ("+fx(d,3)+" in)";
+  $("vL").textContent=fx(L,2)+" in";
+  $("hD").textContent="ligament "+fx((1-dt)*T,3)+" in";
+  $("hL").textContent="z = "+fx(L*L/(D*T),2)+"   6t = "+fx(6*T,2)+" in";
+
+  var mb=modB31G(dt,L),ob=origB31G(dt,L);
+  var pMod=mb.Pf*F,pOrig=ob.Pf*F;
+  var db=dnvPartB(dt,L),da=dnvPartA(dt,L);
+  var pDnvB=db.P*F;
+  var rs=effArea("rstreng"),a2=effArea("api579");
+  var pRS=rs?rs.val*F:NaN;
+  var a1=api579L1(dt,L);
+  var hoop=MAOP*D/(2*T);
+
+  var methods=[
+    {id:"orig",tab:"orig",k:"Original B31G",c:"var(--orig)",burst:ob.Pf,allow:pOrig},
+    {id:"mod",tab:"mod",k:"Modified B31G",c:"var(--mod)",burst:mb.Pf,allow:pMod},
+    {id:"rs",tab:"rs",k:"RSTRENG",c:"var(--rs)",burst:rs?rs.val:NaN,allow:pRS},
+    {id:"dnvB",tab:"dnv",k:"DNV F101 Part B",c:"var(--dnv)",burst:db.P,allow:pDnvB},
+    {id:"dnvA",tab:"dnv",k:"DNV F101 Part A",c:"var(--dnv-2)",burst:NaN,allow:da.P},
+    {id:"api1",tab:"api",k:"API 579 Level 1",c:"var(--api)",burst:NaN,allow:a1.MAWPr},
+    {id:"api2",tab:"api",k:"API 579 Level 2",c:"var(--api-2)",burst:NaN,
+     allow:a2?(a2.val>=RSFa?a1.MAWP:a1.MAWP*a2.val/RSFa):NaN}
+  ];
+  methods.forEach(function(m){m.scoped=inScope(m.id);m.supp=isSupp(m.id)});
+
+  /* ---- COMPARE ---- */
+  var valid=methods.filter(function(m){return isFinite(m.allow)&&m.allow>0});
+  var scoped=valid.filter(function(m){return m.scoped});
+  var pool=scoped.length?scoped:valid;
+  var gov=pool.reduce(function(a,b){return b.allow<a.allow?b:a},pool[0]);
+  var erf=MAOP>0?MAOP/gov.allow:NaN;
+  $("cmpBig").textContent=f0(gov.allow)+" psi";
+  $("cmpSide").innerHTML=gov.k+"<br>ERF "+fx(erf,2)+"<br>operating "+f0(MAOP)+" psi";
+  $("cmpHero").className="hero "+(!isFinite(erf)?"":erf>=1?"bad":erf>=0.9?"warn":"ok");
+
+  var rows='<tr><th>Method</th><th style="text-align:right">Burst, psi</th>'
+    +'<th style="text-align:right">Allowable, psi</th><th style="text-align:right">ERF</th></tr>';
+  methods.forEach(function(m){
+    var e=MAOP>0&&isFinite(m.allow)&&m.allow>0?MAOP/m.allow:NaN;
+    rows+='<tr><td><span class="sw" style="background:'+m.c+'"></span>'+m.k+'</td>'
+      +'<td class="n">'+f0(m.burst)+'</td><td class="n">'+f0(m.allow)+'</td>'
+      +'<td class="n" style="color:'+(isFinite(e)&&e>=1?"var(--bad)":"var(--ink-2)")+'">'
+      +fx(e,2)+'</td></tr>';
+  });
+  $("cmpTable").innerHTML=rows;
+  cmpChart(methods);
+
+  var av=valid.map(function(m){return m.allow});
+  var lo=Math.min.apply(null,av),hi=Math.max.apply(null,av);
+  $("cmpNote").innerHTML="Spread across methods: <b>"+f0(hi-lo)+" psi</b> ("
+    +fx((hi-lo)/lo*100,0)+"% of the lowest). Governing method is "+gov.k+".";
+
+  /* ---------- explicit decision ---------- */
+  var pMeas=gov.allow;
+  var pTol=governingAllowable(dt+TOL,TOL,L);
+  var basisP=isFinite(pTol)?Math.min(pMeas,pTol):pMeas;
+  var yrs=yearsToLimit(dt,L);
+  var interval=isFinite(yrs)?Math.min(yrs/2,5):NaN;
+  var erfTol=MAOP>0&&basisP>0?MAOP/basisP:NaN;
+
+  $("dPress").textContent=f0(basisP)+" psi";
+  $("dBasis").innerHTML="governed by "+gov.k
+    +(TOL>0?" &nbsp;·&nbsp; depth taken at "+fx((dt+TOL)*100,0)+"% wt (measured "
+      +fx(dt*100,0)+" + tolerance "+fx(TOL*100,0)+")":"");
+
+  var cls,act,sub;
+  if(!(MAOP>0)){cls="";act="Enter an operating pressure";sub="There is nothing to compare against yet.";}
+  else if(erfTol>=1){
+    cls="bad"; act="Reduce pressure to "+f0(basisP)+" psi, or repair";
+    sub="Operating pressure of "+f0(MAOP)+" psi exceeds the allowable. This is an immediate "
+      +"condition \u2014 reduce first, then schedule the repair.";
+  } else if(erfTol>=0.9){
+    cls="warn"; act="Acceptable, but schedule a repair";
+    sub="Only "+fx((1-erfTol)*100,0)+"% margin remains at "+f0(MAOP)+" psi. Treat as a "
+      +"scheduled dig rather than leaving it to the next run.";
+  } else if(isFinite(yrs)&&yrs<2){
+    cls="warn"; act="Acceptable now, but not for long";
+    sub="At "+fx(CR,1)+" mpy the margin is consumed in about "+fx(yrs,1)+" years. Plan the "
+      +"response now rather than at the next assessment.";
+  } else {
+    cls="ok"; act="Continue at "+f0(MAOP)+" psi";
+    sub="The anomaly clears every method with margin"
+      +(isFinite(yrs)?" and holds for about "+fx(yrs,1)+" years at "+fx(CR,1)+" mpy.":".");
+  }
+  $("decision").className="decision "+cls;
+  $("dAction").innerHTML=act+"<span>"+sub+"</span>";
+
+  function cell(k,v,s){return '<div class="dcell"><div class="k">'+k+'</div>'
+    +'<div class="v">'+v+'</div><div class="s">'+s+'</div></div>'}
+  $("dGrid").innerHTML=
+     cell("Current operating",f0(MAOP)+" psi","as entered")
+    +cell("ERF at that pressure",fx(erfTol,2),erfTol>=1?"over the limit":"under the limit")
+    +cell("As-measured allowable",f0(pMeas)+" psi","no tolerance added")
+    +cell("Remaining life",isFinite(yrs)?(yrs===0?"0":fx(yrs,1))+" yr":(CR>0?"&gt; 60 yr":"set a rate"),
+          CR>0?"at "+fx(CR,1)+" mpy, depth only":"corrosion rate is zero")
+    +cell("Next assessment",isFinite(interval)?fx(interval,1)+" yr":"\u2014",
+          "half life, 5 yr cap");
+
+  $("dCaveat").innerHTML="<b>What this pressure does and does not mean.</b> It is the pressure "
+    +"at which <i>this one anomaly</i> still meets the margin of the most conservative method "
+    +"above, with your sizing tolerance added to the measured depth. It is not a statement that "
+    +"the pipeline is safe. It says nothing about other anomalies on the line, cracks or "
+    +"seam-weld defects, dents, third-party damage, or growth faster than the "
+    +(CR>0?fx(CR,1)+" mpy":"rate")+" assumed here. Remaining life grows depth only and holds "
+    +"length fixed, so a feature that merges with a neighbour under the 6t rule will fail "
+    +"sooner than shown. Regulatory response times under 49 CFR 192.933 or 195.452 run on their "
+    +"own clock and may be shorter than the interval above. Treat this as the engineering "
+    +"input to a decision, not the decision. Basis: <b>"+JURNAME[JUR]+"</b> \u2014 codes outside that basis are shown for reference and excluded from the pressure above.";
+  steps("cmpSteps",[
+    {lb:"Candidates",sym:"all allowable pressures",
+     sub:valid.map(function(m){return m.k+" = "+f0(m.allow)}).join("  |  ")},
+    {lb:"Minimum",sym:"P_gov = min(all)",sub:"min over "+valid.length+" methods",
+     res:gov.k+" \u2192 "+f0(gov.allow)+" psi"},
+    {lb:"Estimated repair factor",sym:"ERF = P_op / P_gov",
+     sub:"ERF = "+f0(MAOP)+" / "+f0(gov.allow),res:"ERF = "+fx(erf,3),final:true}
+  ]);
+  $("spreadTxt").textContent=spreadText(mb,ob,rs,db);
+
+  /* ---- ORIGINAL B31G ---- */
+  $("origBig").textContent=f0(pOrig)+" psi";
+  $("origSide").innerHTML="burst "+f0(ob.Pf)+"<br>z "+fx(ob.z,2)+"<br>"+ob.branch;
+  $("origHero").className="hero "+(MAOP>0?(MAOP/pOrig>=1?"bad":MAOP/pOrig>=0.9?"warn":"ok"):"");
+  $("origTable").innerHTML=
+     '<tr><th>Quantity</th><th style="text-align:right">Value</th></tr>'
+    +'<tr><td>Flow stress, 1.1 &times; SMYS</td><td class="n">'+f0(ob.Sf)+' psi</td></tr>'
+    +'<tr><td>z = L&sup2;/Dt</td><td class="n">'+fx(ob.z,3)+'</td></tr>'
+    +'<tr><td>Branch</td><td class="n">'+ob.branch+'</td></tr>'
+    +'<tr><td>Folias factor, M</td><td class="n">'+(isFinite(ob.M)?fx(ob.M,4):"n/a")+'</td></tr>'
+    +'<tr><td>Failure stress</td><td class="n">'+f0(ob.SF)+' psi</td></tr>'
+    +'<tr><td>Burst pressure</td><td class="n">'+f0(ob.Pf)+' psi</td></tr>'
+    +'<tr><td>Allowable (&times; F)</td><td class="n">'+f0(pOrig)+' psi</td></tr>';
+  var oSteps=[
+    {lb:"1 \u00b7 Depth ratio",sym:"d/t",sub:fx(d,4)+" / "+fx(T,4),res:"d/t = "+fx(dt,4)},
+    {lb:"2 \u00b7 Shell parameter",sym:"z = L\u00b2 / (D \u00b7 t)",
+     sub:"("+fx(L,3)+")\u00b2 / ("+fx(D,3)+" \u00d7 "+fx(T,4)+")",res:"z = "+fx(ob.z,4)},
+    {lb:"3 \u00b7 Branch",sym:"z \u2264 20 \u2192 parabolic (2/3)dL ; z > 20 \u2192 rectangular dL",
+     sub:"z = "+fx(ob.z,3)+(ob.z<=20?" \u2264 20":" > 20"),res:ob.branch}
+  ];
+  if(ob.z<=20){
+    oSteps.push({lb:"4 \u00b7 Folias factor",sym:"M = \u221a(1 + 0.8 z)",
+      sub:"\u221a(1 + 0.8 \u00d7 "+fx(ob.z,4)+")",res:"M = "+fx(ob.M,4)});
+    oSteps.push({lb:"5 \u00b7 Flow stress",sym:"S_flow = 1.1 \u00d7 SMYS",
+      sub:"1.1 \u00d7 "+f0(SMYS),res:"S_flow = "+f0(ob.Sf)+" psi"});
+    oSteps.push({lb:"6 \u00b7 Failure stress",
+      sym:"S_F = S_flow \u00b7 (1 \u2212 \u2154 d/t) / (1 \u2212 \u2154 (d/t)/M)",
+      sub:f0(ob.Sf)+" \u00d7 "+fx(ob.num,4)+" / "+fx(ob.den,4),res:"S_F = "+f0(ob.SF)+" psi"});
+  } else {
+    oSteps.push({lb:"4 \u00b7 Flow stress",sym:"S_flow = 1.1 \u00d7 SMYS",
+      sub:"1.1 \u00d7 "+f0(SMYS),res:"S_flow = "+f0(ob.Sf)+" psi"});
+    oSteps.push({lb:"5 \u00b7 Failure stress",sym:"S_F = S_flow \u00b7 (1 \u2212 d/t)",
+      sub:f0(ob.Sf)+" \u00d7 (1 \u2212 "+fx(dt,4)+")",res:"S_F = "+f0(ob.SF)+" psi"});
+  }
+  oSteps.push({lb:"Burst pressure",sym:"P_F = 2 \u00b7 S_F \u00b7 t / D",
+    sub:"2 \u00d7 "+f0(ob.SF)+" \u00d7 "+fx(T,4)+" / "+fx(D,3),res:"P_F = "+f0(ob.Pf)+" psi"});
+  oSteps.push({lb:"Allowable",sym:"P_safe = P_F \u00d7 F",
+    sub:f0(ob.Pf)+" \u00d7 "+F,res:"P_safe = "+f0(pOrig)+" psi",final:true});
+  steps("origSteps",oSteps);
+  areaFig("origFig",dt,L,"orig");
+
+  /* ---- MODIFIED B31G ---- */
+  $("modBig").textContent=f0(pMod)+" psi";
+  $("modSide").innerHTML="burst "+f0(mb.Pf)+"<br>M "+fx(mb.M,4)+"<br>ERF "
+    +(MAOP>0?fx(MAOP/pMod,2):"\u2014");
+  $("modHero").className="hero "+(MAOP>0?(MAOP/pMod>=1?"bad":MAOP/pMod>=0.9?"warn":"ok"):"");
+  $("modTable").innerHTML=
+     '<tr><th>Quantity</th><th style="text-align:right">Value</th></tr>'
+    +'<tr><td>d / t</td><td class="n">'+fx(dt,4)+'</td></tr>'
+    +'<tr><td>z = L&sup2;/Dt</td><td class="n">'+fx(mb.z,4)+'</td></tr>'
+    +'<tr><td>Folias factor, M</td><td class="n">'+fx(mb.M,4)+'</td></tr>'
+    +'<tr><td>Flow stress, SMYS + 10 ksi</td><td class="n">'+f0(SFLOW)+' psi</td></tr>'
+    +'<tr><td>Failure stress, S<sub>F</sub></td><td class="n">'+f0(mb.SF)+' psi</td></tr>'
+    +'<tr><td>Burst pressure, P<sub>F</sub></td><td class="n">'+f0(mb.Pf)+' psi</td></tr>'
+    +'<tr><td>Allowable (&times; '+F+')</td><td class="n">'+f0(pMod)+' psi</td></tr>'
+    +'<tr><td>Hoop stress at operating</td><td class="n">'+f0(hoop)+' psi</td></tr>'
+    +'<tr><td>Percent SMYS</td><td class="n">'+fx(hoop/SMYS*100,1)+'%</td></tr>'
+    +'<tr><td>Safety factor, P<sub>F</sub>/P<sub>op</sub></td><td class="n">'
+      +(MAOP>0?fx(mb.Pf/MAOP,2):"\u2014")+'</td></tr>';
+  steps("modSteps",[
+    {lb:"1 \u00b7 Depth ratio",sym:"d/t",sub:fx(d,4)+" in / "+fx(T,4)+" in",
+     res:"d/t = "+fx(dt,4)+"   ("+fx(dt*100,1)+"% wt)"},
+    {lb:"2 \u00b7 Shell parameter",sym:"z = L\u00b2 / (D \u00b7 t)",
+     sub:"("+fx(L,3)+")\u00b2 / ("+fx(D,3)+" \u00d7 "+fx(T,4)+") = "+fc(L*L,4)+" / "+fc(D*T,4),
+     res:"z = "+fx(mb.z,4)},
+    {lb:"3 \u00b7 Folias factor",
+     sym:mb.z<=50?"M = \u221a(1 + 0.6275 z \u2212 0.003375 z\u00b2)   [z \u2264 50]"
+                 :"M = 0.032 z + 3.3   [z > 50]",
+     sub:mb.z<=50
+       ?"\u221a(1 + 0.6275\u00d7"+fx(mb.z,4)+" \u2212 0.003375\u00d7"+fx(mb.z*mb.z,4)+")"
+       :"0.032 \u00d7 "+fx(mb.z,4)+" + 3.3",
+     res:"M = "+fx(mb.M,5)},
+    {lb:"4 \u00b7 Flow stress",sym:"S_flow = SMYS + 10,000 psi",
+     sub:f0(SMYS)+" + 10,000",res:"S_flow = "+f0(SFLOW)+" psi"},
+    {lb:"5 \u00b7 Numerator",sym:"1 \u2212 0.85 (d/t)",
+     sub:"1 \u2212 0.85 \u00d7 "+fx(dt,4),res:fx(mb.num,5)},
+    {lb:"6 \u00b7 Denominator",sym:"1 \u2212 0.85 (d/t) / M",
+     sub:"1 \u2212 0.85 \u00d7 "+fx(dt,4)+" / "+fx(mb.M,5),res:fx(mb.den,5)},
+    {lb:"7 \u00b7 Failure stress",sym:"S_F = S_flow \u00b7 numerator / denominator",
+     sub:f0(SFLOW)+" \u00d7 "+fx(mb.num,5)+" / "+fx(mb.den,5),res:"S_F = "+f0(mb.SF)+" psi"},
+    {lb:"8 \u00b7 Burst pressure",sym:"P_F = 2 \u00b7 S_F \u00b7 t / D",
+     sub:"2 \u00d7 "+f0(mb.SF)+" \u00d7 "+fx(T,4)+" / "+fx(D,3),res:"P_F = "+f0(mb.Pf)+" psi"},
+    {lb:"9 \u00b7 Allowable pressure",sym:"P_safe = P_F \u00d7 F",
+     sub:f0(mb.Pf)+" \u00d7 "+F,res:"P_safe = "+f0(pMod)+" psi"},
+    {lb:"10 \u00b7 Estimated repair factor",sym:"ERF = P_op / P_safe",
+     sub:f0(MAOP)+" / "+f0(pMod),
+     res:"ERF = "+(MAOP>0?fx(MAOP/pMod,3):"\u2014")
+       +(MAOP>0&&MAOP/pMod>=1?"   \u2014 exceeds 1.00":""),final:true}
+  ]);
+  var bRep=allowDt(MAOP/F,L),bRup=allowDt(MAOP,L);
+  $("modThresh").innerHTML=
+     '<tr><th>Event</th><th style="text-align:right">Depth, % wt</th><th style="text-align:right">From here</th></tr>'
+    +'<tr><td>Repair trigger, ERF = 1.00</td><td class="n">'
+      +(isFinite(bRep.dt)?fx(bRep.dt*100,1):"n/a")+'</td><td class="n">'
+      +(isFinite(bRep.dt)?(bRep.dt>dt?"+"+fx((bRep.dt-dt)*100,1)+"% wt":"reached"):"\u2014")+'</td></tr>'
+    +'<tr><td>Rupture, P<sub>F</sub> = operating</td><td class="n">'
+      +(isFinite(bRup.dt)?fx(bRup.dt*100,1):"not reached")+'</td><td class="n">'
+      +(isFinite(bRup.dt)?(bRup.dt>dt?"+"+fx((bRup.dt-dt)*100,1)+"% wt":"reached"):"leaks first")+'</td></tr>'
+    +'<tr><td>Through wall</td><td class="n">100</td><td class="n">+'
+      +fx((1-dt)*100,1)+'% wt</td></tr>';
+  steps("modBack",[
+    {lb:"Target failure stress",sym:"S_target = P_target \u00b7 D / (2 t)",
+     sub:"repair: "+f0(MAOP/F)+" \u00d7 "+fx(D,3)+" / (2 \u00d7 "+fx(T,4)+")",
+     res:"S_target = "+f0(bRep.SFt)+" psi"},
+    {lb:"Stress ratio",sym:"r = S_target / S_flow",
+     sub:f0(bRep.SFt)+" / "+f0(SFLOW),res:"r = "+fx(bRep.r,5)},
+    {lb:"Rearranged",sym:"(d/t) = (1 \u2212 r) / [0.85 (1 \u2212 r/M)]",
+     sub:"(1 \u2212 "+fx(bRep.r,5)+") / [0.85 \u00d7 (1 \u2212 "+fx(bRep.r,5)+"/"+fx(bRep.M,4)+")]",
+     res:"d/t = "+(isFinite(bRep.dt)?fx(bRep.dt,4):"no solution"),final:true}
+  ]);
+  modFig(dt,L);
+
+  /* ---- RSTRENG ---- */
+  if(rs){
+    $("rsBig").textContent=f0(pRS)+" psi";
+    $("rsSide").innerHTML="burst "+f0(rs.val)+"<br>governing L "+fx(rs.L,2)
+      +" in<br>A/A\u2080 "+fx(rs.ratio,4);
+    $("rsHero").className="hero "+(MAOP>0?(MAOP/pRS>=1?"bad":MAOP/pRS>=0.9?"warn":"ok"):"");
+    $("rsTable").innerHTML=
+       '<tr><th>Quantity</th><th style="text-align:right">Value</th></tr>'
+      +'<tr><td>Subsections searched</td><td class="n">'+rs.count.toLocaleString("en-US")+uu('count')+'</td></tr>'
+      +'<tr><td>Governing span</td><td class="n">'+fx(rs.i*DX,2)+' \u2013 '+fx(rs.j*DX,2)+' in</td></tr>'
+      +'<tr><td>Governing length</td><td class="n">'+fx(rs.L,3)+' in</td></tr>'
+      +'<tr><td>Metal lost, A</td><td class="n">'+fc(rs.A,5)+' in&sup2;</td></tr>'
+      +'<tr><td>Original area, A\u2080 = L&middot;t</td><td class="n">'+fc(rs.A0,5)+' in&sup2;</td></tr>'
+      +'<tr><td>Area ratio, A/A&#8320;</td><td class="n">'+fx(rs.ratio,5)+'</td></tr>'
+      +'<tr><td>Folias factor, M</td><td class="n">'+fx(rs.M,4)+'</td></tr>'
+      +'<tr><td>Burst pressure</td><td class="n">'+f0(rs.val)+' psi</td></tr>'
+      +'<tr><td>Allowable (&times; '+F+')</td><td class="n">'+f0(pRS)+' psi</td></tr>'
+      +'<tr><td>Modified B31G, same feature</td><td class="n">'+f0(mb.Pf)+' psi</td></tr>'
+      +'<tr><td>Margin recovered</td><td class="n">'+f0(rs.val-mb.Pf)+' psi</td></tr>';
+    steps("rsSteps",[
+      {lb:"1 \u00b7 Search",sym:"evaluate every contiguous span i\u2192j of the profile",
+       sub:PROF.length+" points \u00d7 "+fx(DX,3)+" in spacing",
+       res:rs.count.toLocaleString("en-US")+" subsections evaluated"},
+      {lb:"2 \u00b7 Governing span",sym:"the span with the lowest P_F",
+       sub:"points "+rs.i+" \u2192 "+rs.j+"  ("+fx(rs.i*DX,2)+" \u2013 "+fx(rs.j*DX,2)+" in)",
+       res:"L = "+fx(rs.L,3)+" in"},
+      {lb:"3 \u00b7 Metal lost",sym:"A = \u222b d(x) dx   (trapezoidal)",
+       sub:"cumulative over the governing span \u00d7 t = "+fx(T,4),
+       res:"A = "+fc(rs.A,5)+" in\u00b2"},
+      {lb:"4 \u00b7 Original area",sym:"A\u2080 = L \u00b7 t",
+       sub:fx(rs.L,3)+" \u00d7 "+fx(T,4),res:"A\u2080 = "+fc(rs.A0,5)+" in\u00b2"},
+      {lb:"5 \u00b7 Area ratio",sym:"A / A\u2080",
+       sub:fc(rs.A,5)+" / "+fc(rs.A0,5),
+       res:"A/A\u2080 = "+fx(rs.ratio,5)+"   (Mod B31G would use 0.85 \u00d7 "+fx(dt,4)
+         +" = "+fx(0.85*dt,5)+")"},
+      {lb:"6 \u00b7 Folias factor",sym:"M = \u221a(1 + 0.6275 z \u2212 0.003375 z\u00b2)",
+       sub:"z = "+fx(rs.L*rs.L/(D*T),4),res:"M = "+fx(rs.M,5)},
+      {lb:"7 \u00b7 Failure stress",
+       sym:"S_F = S_flow \u00b7 (1 \u2212 A/A\u2080) / (1 \u2212 (A/A\u2080)/M)",
+       sub:f0(SFLOW)+" \u00d7 "+fx(1-rs.ratio,5)+" / "+fx(1-rs.ratio/rs.M,5),
+       res:"S_F = "+f0(rs.val*D/(2*T))+" psi"},
+      {lb:"8 \u00b7 Burst and allowable",sym:"P_F = 2 S_F t / D ;  P_safe = P_F \u00d7 F",
+       sub:f0(rs.val)+" \u00d7 "+F,res:"P_safe = "+f0(pRS)+" psi",final:true}
+    ]);
+    var rr='<tr><th>Rank</th><th>Span</th><th style="text-align:right">L, in</th>'
+      +'<th style="text-align:right">A/A\u2080</th><th style="text-align:right">P<sub>F</sub>, psi</th></tr>';
+    rs.runners.forEach(function(r,i){
+      rr+='<tr><td>'+(i+1)+(i===0?" \u25c0":"")+'</td><td>'+fx(r.i*DX,2)+'\u2013'+fx(r.j*DX,2)
+        +'</td><td class="n">'+fx(r.L,2)+'</td><td class="n">'+fx(r.ratio,4)
+        +'</td><td class="n">'+f0(r.val)+'</td></tr>';
+    });
+    $("rsRunners").innerHTML=rr;
+    rsFig(rs);
+  } else {
+    $("rsBig").textContent="\u2014"; $("rsSide").innerHTML="need a profile";
+    $("rsHero").className="hero";
+    $("rsTable").innerHTML='<tr><td>Enter at least two profile points on the Profile tab.</td></tr>';
+    $("rsRunners").innerHTML=""; $("rsFig").innerHTML=""; steps("rsSteps",[]);
+  }
+
+  /* ---- DNV ---- */
+  $("dnvBig").textContent=f0(da.P)+" psi";
+  $("dnvSide").innerHTML="Part B allow "+f0(pDnvB)+"<br>Q "+fx(db.Q,4)
+    +"<br>(d/t)* "+fx(da.dts,4);
+  $("dnvHero").className="hero "+(MAOP>0&&da.P>0?(MAOP/da.P>=1?"bad":MAOP/da.P>=0.9?"warn":"ok"):"");
+  $("dnvTable").innerHTML=
+     '<tr><th>Quantity</th><th style="text-align:right">Value</th></tr>'
+    +'<tr><td>Q (bulging)</td><td class="n">'+fx(db.Q,5)+'</td></tr>'
+    +'<tr><td>Base term 2t&middot;SMTS/(D\u2212t)</td><td class="n">'+f0(db.base)+' psi</td></tr>'
+    +'<tr><td>P<sub>corr</sub> capacity, Part B</td><td class="n">'+f0(db.P)+' psi</td></tr>'
+    +'<tr><td>Part B allowable (&times; '+F+')</td><td class="n">'+f0(pDnvB)+' psi</td></tr>'
+    +'<tr><td>(d/t)* with sizing uncertainty</td><td class="n">'+fx(da.dts,5)+'</td></tr>'
+    +'<tr><td>Part A allowable</td><td class="n">'+f0(da.P)+' psi</td></tr>'
+    +'<tr><td>Modified B31G, for reference</td><td class="n">'+f0(pMod)+' psi</td></tr>';
+  steps("dnvSteps",[
+    {lb:"1 \u00b7 Bulging factor",sym:"Q = \u221a(1 + 0.31 (L / \u221a(D t))\u00b2)",
+     sub:"L/\u221a(Dt) = "+fx(L,3)+" / "+fx(Math.sqrt(D*T),4)+" = "+fx(L/Math.sqrt(D*T),4),
+     res:"Q = "+fx(db.Q,5)},
+    {lb:"2 \u00b7 Base term",sym:"2 t \u00b7 SMTS / (D \u2212 t)",
+     sub:"2 \u00d7 "+fx(T,4)+" \u00d7 "+f0(SMTS)+" / ("+fx(D,3)+" \u2212 "+fx(T,4)+")",
+     res:f0(db.base)+" psi"},
+    {lb:"3 \u00b7 Part B capacity",
+     sym:"P_corr = base \u00b7 (1 \u2212 d/t) / (1 \u2212 (d/t)/Q)",
+     sub:f0(db.base)+" \u00d7 "+fx(db.num,5)+" / "+fx(db.den,5),
+     res:"P_corr = "+f0(db.P)+" psi"},
+    {lb:"4 \u00b7 Part B allowable",sym:"\u00d7 design factor F",
+     sub:f0(db.P)+" \u00d7 "+F,res:f0(pDnvB)+" psi"},
+    {lb:"5 \u00b7 Part A \u2014 sized depth",sym:"(d/t)* = (d/t) + \u03b5_d \u00b7 StD[d/t]",
+     sub:fx(dt,4)+" + "+fx(ED,2)+" \u00d7 "+fx(STD,3),res:"(d/t)* = "+fx(da.dts,5)},
+    {lb:"6 \u00b7 Part A numerator",sym:"1 \u2212 \u03b3_d (d/t)*",
+     sub:"1 \u2212 "+fx(GD,3)+" \u00d7 "+fx(da.dts,5),res:fx(da.num,5)
+       +(da.num<=0?"   \u2014 non-positive, capacity exhausted":"")},
+    {lb:"7 \u00b7 Part A denominator",sym:"1 \u2212 \u03b3_d (d/t)* / Q",
+     sub:"1 \u2212 "+fx(GD,3)+" \u00d7 "+fx(da.dts,5)+" / "+fx(db.Q,4),res:fx(da.den,5)},
+    {lb:"8 \u00b7 Part A allowable",
+     sym:"P_A = \u03b3_m \u00b7 base \u00b7 numerator / denominator",
+     sub:fx(GM,3)+" \u00d7 "+f0(db.base)+" \u00d7 "+fx(da.num,5)+" / "+fx(da.den,5),
+     res:"P_A = "+f0(da.P)+" psi",final:true}
+  ]);
+  dnvFig(L);
+
+  /* ---- API 579 ---- */
+  var gate1=a1.Rt>=0.20,gate2=(a1.tmm-FCA)>=0.10,pass=a1.RSF>=RSFa&&gate1&&gate2;
+  var l2pass=a2?a2.val>=RSFa:null;
+  $("apiBig").textContent = pass ? "Level 1 acceptable"
+    : (l2pass===true ? "Level 2 acceptable"
+    : (l2pass===false ? "Level 2 not met" : "Level 1 not met"));
+  $("apiSide").innerHTML="L1 RSF "+fx(a1.RSF,4)
+    +"<br>L2 RSF "+(a2?fx(a2.val,4):"no profile")
+    +"<br>R<sub>t</sub> "+fx(a1.Rt,4)+" \u00b7 \u03bb "+fx(a1.lam,3);
+  $("apiHero").className="hero "+(pass||l2pass===true?"ok":l2pass===false?"bad":"warn");
+  $("apiTable").innerHTML=
+     '<tr><th>Quantity</th><th style="text-align:right">Value</th></tr>'
+    +'<tr><td>t<sub>c</sub> = t &minus; FCA</td><td class="n">'+fc(a1.tc,4)+' in</td></tr>'
+    +'<tr><td>t<sub>mm</sub> minimum remaining</td><td class="n">'+fc(a1.tmm,4)+' in</td></tr>'
+    +'<tr><td>R<sub>t</sub></td><td class="n">'+fx(a1.Rt,5)+'</td></tr>'
+    +'<tr><td>&lambda;</td><td class="n">'+fx(a1.lam,4)+'</td></tr>'
+    +'<tr><td>M<sub>t</sub></td><td class="n">'+fx(a1.Mt,4)+'</td></tr>'
+    +'<tr><td>RSF</td><td class="n">'+fx(a1.RSF,5)+'</td></tr>'
+    +'<tr><td>RSF<sub>a</sub> acceptance</td><td class="n">'+RSFa.toFixed(2)+'</td></tr>'
+    +'<tr><td>MAWP basis</td><td class="n">'+(a1.entered?"entered":"computed")+'</td></tr>'
+    +'<tr><td>MAWP</td><td class="n">'+f0(a1.MAWP)+' psi</td></tr>'
+    +(a1.entered?'<tr><td>MAWP if computed instead</td><td class="n">'+f0(a1.MAWPcalc)+' psi</td></tr>':'')
+    +'<tr><td>Reduced MAWP</td><td class="n">'+f0(a1.MAWPr)+' psi</td></tr>';
+  steps("apiSteps",[
+    {lb:"1 \u00b7 Corroded wall",sym:"t_c = t_nom \u2212 FCA",
+     sub:fx(T,4)+" \u2212 "+fx(FCA,4),res:"t_c = "+fc(a1.tc,4)+" in"},
+    {lb:"2 \u00b7 Minimum remaining",sym:"t_mm = t \u00b7 (1 \u2212 d/t)",
+     sub:fx(T,4)+" \u00d7 (1 \u2212 "+fx(dt,4)+")",res:"t_mm = "+fc(a1.tmm,4)+" in"},
+    {lb:"3 \u00b7 Thickness ratio",sym:"R_t = (t_mm \u2212 FCA) / t_c",
+     sub:"("+fc(a1.tmm,4)+" \u2212 "+fx(FCA,4)+") / "+fc(a1.tc,4),res:"R_t = "+fx(a1.Rt,5)},
+    {lb:"4 \u00b7 Inside diameter",sym:"D_i = D \u2212 2 t_c",
+     sub:fx(D,3)+" \u2212 2 \u00d7 "+fc(a1.tc,4),res:"D_i = "+fx(a1.Di,4)+" in"},
+    {lb:"5 \u00b7 Shell parameter",sym:"\u03bb = 1.285 \u00b7 s / \u221a(D_i \u00b7 t_c)",
+     sub:"1.285 \u00d7 "+fx(L,3)+" / \u221a("+fx(a1.Di,4)+" \u00d7 "+fc(a1.tc,4)+")",
+     res:"\u03bb = "+fx(a1.lam,5)},
+    {lb:"6 \u00b7 Bulging factor",sym:"M_t = \u221a(1 + 0.48 \u03bb\u00b2)",
+     sub:"\u221a(1 + 0.48 \u00d7 "+fx(a1.lam*a1.lam,4)+")",res:"M_t = "+fx(a1.Mt,5)},
+    {lb:"7 \u00b7 Remaining strength factor",
+     sym:"RSF = R_t / [1 \u2212 (1/M_t)(1 \u2212 R_t)]",
+     sub:fx(a1.Rt,5)+" / [1 \u2212 (1/"+fx(a1.Mt,4)+")(1 \u2212 "+fx(a1.Rt,5)+")]",
+     res:"RSF = "+fx(a1.RSF,5)},
+    {lb:"8 \u00b7 Acceptance",sym:"RSF \u2265 RSF_a = 0.90 ?",
+     sub:fx(a1.RSF,4)+(a1.RSF>=RSFa?" \u2265 ":" < ")+"0.90",
+     res:a1.RSF>=RSFa?"Level 1 acceptable":"Level 1 not met \u2014 go to Level 2"},
+    {lb:"9 \u00b7 MAWP",
+     sym:a1.entered?"MAWP taken from your input \u2014 not derived here"
+                   :"MAWP = 2 \u00b7 S \u00b7 t_c / D ,  S = F \u00d7 SMYS",
+     sub:a1.entered
+       ?"entered "+f0(a1.MAWP)+" psi   (the design equation would give "+f0(a1.MAWPcalc)+" psi)"
+       :"S = "+F+" \u00d7 "+f0(SMYS)+" = "+f0(a1.S)+" psi ;  2 \u00d7 "+f0(a1.S)+" \u00d7 "
+        +fc(a1.tc,4)+" / "+fx(D,3),
+     res:"MAWP = "+f0(a1.MAWP)+" psi"},
+    {lb:"10 \u00b7 Reduced MAWP",sym:"MAWP_r = MAWP \u00b7 RSF / RSF_a   (when RSF < RSF_a)",
+     sub:a1.RSF>=RSFa?"RSF clears \u2014 no reduction"
+       :f0(a1.MAWP)+" \u00d7 "+fx(a1.RSF,4)+" / 0.90",
+     res:"MAWP_r = "+f0(a1.MAWPr)+" psi",final:true}
+  ]);
+  var gates=[];
+  if(!gate1)gates.push("R<sub>t</sub> = "+fx(a1.Rt,3)+" is below the 0.20 floor \u2014 Level 1 not applicable.");
+  if(!gate2)gates.push("Remaining thickness "+fc(a1.tmm-FCA,4)+" in is under the 0.10 in minimum.");
+  if(FCA<=0)gates.push("FCA is zero. 579 is built around remaining life; a real assessment needs one.");
+  gates.push("Not checked here: distance to the nearest major structural discontinuity "
+    +"(L<sub>msd</sub>), weld proximity, and whether the loss is local or general.");
+  $("apiGates").innerHTML=gates.join(" ");
+  $("apiGates").className="note"+((!gate1||!gate2)?" bad":"");
+  if(a2){
+    var a2MAWP=a2.val>=RSFa?a1.MAWP:a1.MAWP*a2.val/RSFa;
+    $("api2Table").innerHTML=
+       '<tr><th>Quantity</th><th style="text-align:right">Value</th></tr>'
+      +'<tr><td>Governing span</td><td class="n">'+fx(a2.i*DX,2)+' \u2013 '+fx(a2.j*DX,2)+' in</td></tr>'
+      +'<tr><td>Governing length</td><td class="n">'+fx(a2.L,3)+' in</td></tr>'
+      +'<tr><td>Area ratio, A/A&#8320;</td><td class="n">'+fx(a2.ratio,5)+'</td></tr>'
+      +'<tr><td>M<sub>t</sub></td><td class="n">'+fx(a2.M,4)+'</td></tr>'
+      +'<tr><td>RSF, Level 2</td><td class="n">'+fx(a2.val,5)+'</td></tr>'
+      +'<tr><td>RSF, Level 1</td><td class="n">'+fx(a1.RSF,5)+'</td></tr>'
+      +'<tr><td>Verdict</td><td class="n" style="color:'
+        +(a2.val>=RSFa?"var(--ok)":"var(--bad)")+'">'
+        +(a2.val>=RSFa?"Acceptable":"Reduce MAWP")+'</td></tr>'
+      +'<tr><td>Reduced MAWP</td><td class="n">'+f0(a2MAWP)+' psi</td></tr>';
+    steps("api2Steps",[
+      {lb:"1 \u00b7 Search",sym:"same subsection sweep as RSTRENG, scored on RSF",
+       sub:PROF.length+" points, "+a2.count.toLocaleString("en-US")+" subsections",
+       res:"governing span "+fx(a2.i*DX,2)+" \u2013 "+fx(a2.j*DX,2)+" in"},
+      {lb:"2 \u00b7 Area ratio",sym:"A / A\u2080",
+       sub:fc(a2.A,5)+" / "+fc(a2.A0,5),res:fx(a2.ratio,5)},
+      {lb:"3 \u00b7 Shell parameter",sym:"\u03bb = 1.285 \u00b7 L / \u221a(D_i t_c)",
+       sub:"L = "+fx(a2.L,3)+" in",res:"\u03bb = "+fx(lam579(a2.L,a1.tc),4)},
+      {lb:"4 \u00b7 Bulging factor",sym:"M_t = \u221a(1 + 0.48 \u03bb\u00b2)",
+       sub:"",res:"M_t = "+fx(a2.M,5)},
+      {lb:"5 \u00b7 RSF",sym:"RSF = (1 \u2212 A/A\u2080) / [1 \u2212 (A/A\u2080)/M_t]",
+       sub:fx(1-a2.ratio,5)+" / "+fx(1-a2.ratio/a2.M,5),res:"RSF = "+fx(a2.val,5)},
+      {lb:"6 \u00b7 Result",sym:"MAWP_r = MAWP \u00b7 RSF / 0.90 when RSF < 0.90",
+       sub:a2.val>=RSFa?"RSF clears \u2014 no reduction":f0(a1.MAWP)+" \u00d7 "+fx(a2.val,4)+" / 0.90",
+       res:f0(a2MAWP)+" psi",final:true}
+    ]);
+  } else {
+    $("api2Table").innerHTML='<tr><td>Enter a profile on the Profile tab to run Level 2.</td></tr>';
+    steps("api2Steps",[]);
+  }
+  apiFig(a1);
+
+  /* ---- PROFILE ---- */
+  profChart(rs);
+  var mx=PROF.length?Math.max.apply(null,PROF):0;
+  $("profStats").innerHTML=
+     '<tr><th>Quantity</th><th style="text-align:right">Value</th></tr>'
+    +'<tr><td>Points</td><td class="n">'+PROF.length+uu('count')+'</td></tr>'
+    +'<tr><td>Spacing</td><td class="n">'+fx(DX,3)+' in</td></tr>'
+    +'<tr><td>Total span</td><td class="n">'+fx(Math.max(0,(PROF.length-1)*DX),2)+' in</td></tr>'
+    +'<tr><td>Max depth</td><td class="n">'+fx(mx*100,1)+'% wt</td></tr>'
+    +'<tr><td>Subsections searched</td><td class="n">'
+      +(PROF.length>1?(PROF.length*(PROF.length-1)/2).toLocaleString("en-US"):0)+'</td></tr>';
+  $("profNote").innerHTML=PROF.length<2
+    ? "Fewer than two points. RSTRENG and API 579 Level 2 are disabled."
+    : "Spacing of "+fx(DX,3)+" in over "+fx((PROF.length-1)*DX,2)+" in. Finer spacing finds "
+      +"deeper governing subsections; coarse spacing smooths them away.";
+  if(PROF.length>1){
+    var cum=[0];
+    for(var k=1;k<PROF.length;k++)cum.push(cum[k-1]+(PROF[k-1]+PROF[k])/2*DX);
+    var show=Math.min(PROF.length,6),lines=[];
+    for(var k=1;k<show;k++)
+      lines.push("k="+k+": ("+fx(PROF[k-1],3)+"+"+fx(PROF[k],3)+")/2 \u00d7 "+fx(DX,3)
+        +" = "+fc((PROF[k-1]+PROF[k])/2*DX,5));
+    steps("profSteps",[
+      {lb:"Trapezoid rule per interval",
+       sym:"\u0394A_k = (d_{k-1} + d_k)/2 \u00d7 \u0394x   [depth as fraction of t]",
+       sub:lines.join("<br>")+(PROF.length>show?"<br>\u2026":""),
+       res:"running sum feeds every subsection"},
+      {lb:"Cumulative",sym:"cum[j] \u2212 cum[i] gives the fractional-depth area of span i\u2192j",
+       sub:"cum[last] = "+fc(cum[cum.length-1],5)+" (fraction\u00b7in)",
+       res:"\u00d7 t = "+fc(cum[cum.length-1]*T,5)+" in\u00b2 total metal lost",final:true}
+    ]);
+  } else steps("profSteps",[]);
+
+  /* ---------- one-line summary per code ---------- */
+  var ms='';
+  methods.forEach(function(m){
+    var e=MAOP>0&&isFinite(m.allow)&&m.allow>0?MAOP/m.allow:NaN;
+    var tag=m.scoped?'<span class="mtag tag-req">binding</span>'
+      :m.supp?'<span class="mtag tag-sup">supplementary</span>'
+      :'<span class="mtag tag-na">not applicable</span>';
+    var verdict=!isFinite(e)?"\u2014":(e>=1?"fails":e>=0.9?"marginal":"passes");
+    ms+='<button class="mrow'+(m.scoped?'':(m.supp?' supp':' out'))+'" data-go="'+m.tab+'">'
+      +'<span class="mdot" style="background:'+m.c+'"></span>'
+      +'<span class="mmid"><span class="mname">'+m.k+'</span>'+tag
+      +'<span class="msub">'+BLURB[m.id]+'</span></span>'
+      +'<span class="mval">'+f0(m.allow)+' psi<i>'+verdict
+      +(isFinite(e)?' \u00b7 ERF '+fx(e,2):'')+'</i></span>'
+      +'<span class="mgo">\u203a</span></button>';
+  });
+  $("mSummary").innerHTML=ms;
+  Array.prototype.forEach.call($("mSummary").querySelectorAll(".mrow"),function(b){
+    b.addEventListener("click",function(){goTab(b.dataset.go)});
+  });
+
+  /* ---------- conclusion on each method tab ---------- */
+  function conclude(el,m,extra){
+    var e=MAOP>0&&isFinite(m.allow)&&m.allow>0?MAOP/m.allow:NaN;
+    var cls,head2,body;
+    if(!isFinite(e)){cls="na";head2="Not evaluated";
+      body="This method has no result for the current inputs.";}
+    else if(e>=1){cls="bad";head2="Fails at "+f0(MAOP)+" psi";
+      body="Allowable pressure is <span class=\"cnum\">"+f0(m.allow)+" psi</span> against an "
+        +"operating pressure of "+f0(MAOP)+" psi, ERF <span class=\"cnum\">"+fx(e,2)
+        +"</span>. Reduce to "+f0(m.allow)+" psi or repair.";}
+    else if(e>=0.9){cls="warn";head2="Passes, with little margin";
+      body="Allowable pressure is <span class=\"cnum\">"+f0(m.allow)+" psi</span>, ERF "
+        +"<span class=\"cnum\">"+fx(e,2)+"</span>. Under 10% margin \u2014 treat as a "
+        +"scheduled repair rather than leaving it to the next run.";}
+    else {cls="ok";head2="Passes at "+f0(MAOP)+" psi";
+      body="Allowable pressure is <span class=\"cnum\">"+f0(m.allow)+" psi</span>, ERF "
+        +"<span class=\"cnum\">"+fx(e,2)+"</span>.";}
+    var scopeLine = m.scoped
+      ? "This code is <b>binding</b> for the selected basis ("+JURNAME[JUR]+"), so it counts "
+        +"toward the safe operating pressure."
+      : m.supp
+      ? "This code is <b>supplementary</b> for the selected basis ("+JURNAME[JUR]+"). It is "
+        +"computed and shown, but does not set the safe operating pressure. Reach for it on "
+        +"cases the binding codes cannot handle \u2014 circumferential metal loss under axial "
+        +"load, or loss close to a discontinuity."
+      : "This code is <b>not applicable</b> to the selected basis ("+JURNAME[JUR]+"). Shown for "
+        +"comparison only.";
+    $(el).className="concl "+cls;
+    $(el).innerHTML="<h4>"+head2+"</h4><p>"+body+"</p><p>"+scopeLine+"</p>"
+      +(extra?"<p>"+extra+"</p>":"");
+  }
+  var byId={}; methods.forEach(function(m){byId[m.id]=m});
+  conclude("origConcl",byId.orig,
+    ob.z>20?"z = "+fx(ob.z,1)+" is past the cutoff, so the rectangular dL area applies and this "
+      +"result is markedly harsher than Modified B31G.":"");
+  conclude("modConcl",byId.mod,
+    "Depth would have to reach <span class=\"cnum\">"
+    +(isFinite(bRep.dt)?fx(bRep.dt*100,0)+"% wt":"\u2014")+"</span> before ERF reaches 1.00 at "
+    +"this length.");
+  conclude("rsConcl",byId.rs, rs
+    ? "Governing subsection is <span class=\"cnum\">"+fx(rs.L,2)+" in</span> of the "
+      +fx((PROF.length-1)*DX,2)+" in profile, recovering "+f0(rs.val-mb.Pf)
+      +" psi of burst pressure over Modified B31G."
+    : "No profile entered \u2014 add depth points on the Profile tab to run this method.");
+  conclude("dnvConcl",byId.dnvA,
+    "Part B allowable is "+f0(pDnvB)+" psi; Part A is "+f0(da.P)+" psi after applying "
+    +"\u03b3<sub>m</sub> = "+fx(GM,2)+" and a sized depth of "+fx(da.dts*100,1)+"% wt.");
+  conclude("apiConcl",byId.api1,
+    "Level 1 RSF is "+fx(a1.RSF,3)+(a2?"; Level 2 on the profile gives "+fx(a2.val,3):"")
+    +", against RSF<sub>a</sub> = 0.90."
+    +(a1.entered?" MAWP is your entered value.":" MAWP is computed from F \u00d7 SMYS."));
+
+
+  if(FEATS.length)screenDraw();
+  /* keep the geometry sliders in step with the main feature inputs */
+  if($("gD").value!==$("rD").value)$("gD").value=$("rD").value;
+  if($("gL").value!==$("rL").value)$("gL").value=$("rL").value;
+  geoDraw();
+}
+
+function spreadText(mb,ob,rs,db){
+  var s=[];
+  s.push("Modified B31G reads "+f0(mb.Pf)+" psi against original B31G at "+f0(ob.Pf)
+    +" psi \u2014 the gap is the 0.85 versus 2/3 area shape plus the flow stress definition.");
+  if(rs){
+    var g=rs.val-mb.Pf;
+    s.push(g>50
+      ? "RSTRENG recovers "+f0(g)+" psi over Modified B31G because the profile is not a "
+        +"rectangle; the governing subsection is only "+fx(rs.L,2)+" in of the "
+        +fx((PROF.length-1)*DX,2)+" in total."
+      : "RSTRENG lands close to Modified B31G here, which means the profile is nearly "
+        +"rectangular \u2014 there is no shape margin to recover.");
+  }
+  s.push("DNV uses SMTS ("+f0(SMTS)+" psi) where B31G uses SMYS + 10 ksi ("+f0(SFLOW)
+    +" psi), so the yield-to-tensile ratio of the grade shifts that comparison independently "
+    +"of the flaw geometry.");
+  return s.join(" ");
+}
+
+/* ================= FIGURES ================= */
+function cmpChart(methods){
+  var vals=methods.map(function(m){return m.allow}).filter(function(v){return isFinite(v)&&v>0});
+  var mx=Math.max(Math.max.apply(null,vals),MAOP||0)*1.06;
+  var s='';
+  methods.forEach(function(m){
+    var w=isFinite(m.allow)&&m.allow>0?Math.max(0.6,m.allow/mx*100):0;
+    s+='<div class="brow">'
+      +'<div class="bhead"><span class="bk">'+m.k+'</span>'
+      +'<span class="bv">'+f0(m.allow)+' psi</span></div>'
+      +'<div class="btrack"><div class="bfill" style="width:'+w.toFixed(1)
+      +'%;background:'+m.c+'"></div></div></div>';
+  });
+  if(MAOP>0&&MAOP<mx){
+    var pc=MAOP/mx*100, right=pc>62;
+    s+='<div class="bmark" style="left:'+pc.toFixed(1)+'%"></div>'
+      +'<div class="bmlab" style="'+(right
+        ?'right:'+(100-pc).toFixed(1)+'%;padding-right:5px'
+        :'left:'+pc.toFixed(1)+'%;padding-left:5px')
+      +'">operating '+f0(MAOP)+'</div>';
+  }
+  $("cmpChart").innerHTML=s;
+}
+
+
+function areaFig(el,dt,L,which){
+  var x0=20,top=34,H=68,PW=280,LMAX=36,bot=top+H;
+  var pw=Math.min(PW-10,PW*(L/LMAX)+10),px=x0+(PW-pw)/2,pd=H*Math.min(dt,0.95);
+  var z=L*L/(D*T),s='';
+  s+='<rect x="'+x0+'" y="'+top+'" width="'+PW+'" height="'+H+'" fill="var(--fig-steel)" stroke="var(--fig-edge)"/>';
+  s+='<path d="M'+px+' '+top+' Q'+(px+pw/2)+' '+(top+pd*2)+' '+(px+pw)+' '+top
+    +'" fill="var(--fig-void)" stroke="var(--ink-2)" stroke-width="1.6"/>';
+  if(which==="orig"&&z>20){
+    s+='<rect x="'+px+'" y="'+top+'" width="'+pw+'" height="'+pd.toFixed(1)+'" fill="none" '
+      +'stroke="var(--orig)" stroke-width="2.2" stroke-dasharray="2 3"/>';
+    s+='<text x="'+x0+'" y="18" font-family="ui-monospace,monospace" font-size="9.5" '
+      +'fill="var(--orig)">\u00b7 \u00b7  dL rectangle \u2014 z = '+fx(z,1)+' exceeds 20</text>';
+  } else {
+    s+='<rect x="'+px+'" y="'+top+'" width="'+pw+'" height="'+(pd*2/3).toFixed(1)+'" fill="none" '
+      +'stroke="var(--orig)" stroke-width="2.2" stroke-dasharray="2 3"/>';
+    s+='<text x="'+x0+'" y="18" font-family="ui-monospace,monospace" font-size="9.5" '
+      +'fill="var(--orig)">\u00b7 \u00b7  (2/3) dL parabola \u2014 z = '+fx(z,1)+'</text>';
+  }
+  s+='<rect x="'+px+'" y="'+top+'" width="'+pw+'" height="'+(pd*0.85).toFixed(1)+'" fill="none" '
+    +'stroke="var(--mod)" stroke-width="2" stroke-dasharray="5 3"/>';
+  s+='<text x="'+x0+'" y="29" font-family="ui-monospace,monospace" font-size="9.5" '
+    +'fill="var(--mod)">\u2013 \u2013  0.85 dL \u2014 Modified B31G, for comparison</text>';
+  s+='<line x1="'+x0+'" y1="'+bot+'" x2="'+(x0+PW)+'" y2="'+bot+'" stroke="var(--axis)" stroke-width="2"/>';
+  s+='<text x="'+(x0+PW)+'" y="18" text-anchor="end" font-family="ui-monospace,monospace" '
+    +'font-size="9.5" fill="var(--ink-2)">\u2014 actual shape</text>';
+  s+='<text x="'+(x0+PW/2)+'" y="'+(bot+18)+'" text-anchor="middle" '
+    +'font-family="ui-monospace,monospace" font-size="9.5" fill="var(--ink-2)">'
+    +'bigger assumed area \u2192 lower predicted pressure</text>';
+  $(el).innerHTML=s;
+}
+
+function profileSVG(rs,H,showGov){
+  var x0=22,y0=14,W=286,n=PROF.length;
+  if(n<2)return '<text x="14" y="30" font-family="ui-monospace,monospace" font-size="10" '
+    +'fill="var(--ink-3)">no profile</text>';
+  var span=(n-1)*DX,s='';
+  function X(k){return x0+k/(n-1)*W}
+  function Y(v){return y0+v*H}
+  s+='<rect x="'+x0+'" y="'+y0+'" width="'+W+'" height="'+H+'" fill="var(--fig-steel)" stroke="var(--fig-edge)"/>';
+  if(showGov&&rs){
+    s+='<rect x="'+X(rs.i).toFixed(1)+'" y="'+y0+'" width="'+(X(rs.j)-X(rs.i)).toFixed(1)
+      +'" height="'+H+'" fill="var(--rs)" opacity="0.14"/>';
+    [rs.i,rs.j].forEach(function(k){
+      s+='<line x1="'+X(k).toFixed(1)+'" y1="'+y0+'" x2="'+X(k).toFixed(1)+'" y2="'+(y0+H)
+        +'" stroke="var(--rs)" stroke-width="1.6"/>';
+    });
+  }
+  var pts=[];
+  for(var k=0;k<n;k++)pts.push(X(k).toFixed(1)+","+Y(Math.min(PROF[k],0.98)).toFixed(1));
+  s+='<polygon points="'+x0+','+y0+' '+pts.join(" ")+' '+(x0+W)+','+y0+'" fill="var(--fig-void)"/>';
+  s+='<polyline points="'+pts.join(" ")+'" fill="none" stroke="var(--bad)" stroke-width="2"/>';
+  s+='<line x1="'+x0+'" y1="'+(y0+H)+'" x2="'+(x0+W)+'" y2="'+(y0+H)+'" stroke="var(--axis)" stroke-width="2"/>';
+  s+='<text x="'+x0+'" y="'+(y0+H+14)+'" font-family="ui-monospace,monospace" font-size="9.5" '
+    +'fill="var(--ink-2)">0</text>';
+  s+='<text x="'+(x0+W)+'" y="'+(y0+H+14)+'" text-anchor="end" font-family="ui-monospace,monospace" '
+    +'font-size="9.5" fill="var(--ink-2)">'+span.toFixed(1)+' in</text>';
+  s+='<text x="'+(x0+W/2)+'" y="'+(y0+H+14)+'" text-anchor="middle" '
+    +'font-family="ui-monospace,monospace" font-size="9.5" fill="var(--ink-2)">inside surface</text>';
+  return s;
+}
+function profChart(rs){$("profChart").innerHTML=profileSVG(rs,100,false)}
+function rsFig(rs){
+  var s=profileSVG(rs,110,true);
+  s+='<text x="22" y="164" font-family="ui-monospace,monospace" font-size="9.5" fill="var(--rs)">'
+    +'shaded = governing subsection, '+fx(rs.L,2)+' in, A/A\u2080 '+fx(rs.ratio,3)+'</text>';
+  $("rsFig").innerHTML=s;
+}
+
+function modFig(dt,L){
+  var x0=42,y0=16,W=258,H=160,yb=y0+H,LMAX=36;
+  var PIN=2*SFLOW*T/D,PMAX=Math.max(PIN,MAOP*1.15);
+  function X(l){return x0+l/LMAX*W}
+  function Y(p){return yb-Math.min(p,PMAX)/PMAX*H}
+  function pf(d2,l){var z=l*l/(D*T),M=Mmod(z);
+    return 2*(SFLOW*(1-0.85*d2)/(1-0.85*d2/M))*T/D}
+  var s='';
+  [0,0.25,0.5,0.75,1].forEach(function(f){
+    var y=yb-f*H;
+    s+='<line x1="'+x0+'" y1="'+y.toFixed(1)+'" x2="'+(x0+W)+'" y2="'+y.toFixed(1)
+      +'" stroke="var(--grid)"/>';
+    s+='<text x="'+(x0-6)+'" y="'+(y+3.5).toFixed(1)+'" text-anchor="end" '
+      +'font-family="ui-monospace,monospace" font-size="8.5" fill="var(--ink-3)">'
+      +Math.round(f*PMAX/100)*100+'</text>';
+  });
+  var ds=[0.2,0.4,0.6,0.8],cols=["var(--c1)","var(--c2)","var(--mod)","var(--c4)"];
+  ds.forEach(function(dd,i){
+    var p=[];
+    for(var l=0.25;l<=LMAX+0.001;l+=0.25)p.push(X(l).toFixed(1)+","+Y(pf(dd,l)).toFixed(1));
+    s+='<polyline points="'+p.join(" ")+'" fill="none" stroke="'+cols[i]+'" stroke-width="2"/>';
+    s+='<text x="'+(x0+W-2)+'" y="'+(Y(pf(dd,LMAX))-4).toFixed(1)+'" text-anchor="end" '
+      +'font-family="ui-monospace,monospace" font-size="8.5" fill="'+cols[i]+'">'
+      +Math.round(dd*100)+'%</text>';
+  });
+  if(MAOP>0&&MAOP<PMAX){
+    var ym=Y(MAOP);
+    s+='<line x1="'+x0+'" y1="'+ym.toFixed(1)+'" x2="'+(x0+W)+'" y2="'+ym.toFixed(1)
+      +'" stroke="var(--bad)" stroke-width="2"/>';
+    s+='<text x="'+(x0+4)+'" y="'+(ym-5).toFixed(1)+'" font-family="ui-monospace,monospace" '
+      +'font-size="9" fill="var(--bad)">operating '+f0(MAOP)+'</text>';
+    if(MAOP/F<PMAX){
+      var yr=Y(MAOP/F);
+      s+='<line x1="'+x0+'" y1="'+yr.toFixed(1)+'" x2="'+(x0+W)+'" y2="'+yr.toFixed(1)
+        +'" stroke="var(--warn)" stroke-width="1.5" stroke-dasharray="5 4"/>';
+      s+='<text x="'+(x0+4)+'" y="'+(yr-5).toFixed(1)+'" font-family="ui-monospace,monospace" '
+        +'font-size="9" fill="var(--warn)">repair trigger '+f0(MAOP/F)+'</text>';
+    }
+  }
+  var cx=X(Math.min(L,LMAX)),cy=Y(pf(dt,Math.min(L,LMAX)));
+  s+='<line x1="'+cx.toFixed(1)+'" y1="'+y0+'" x2="'+cx.toFixed(1)+'" y2="'+yb
+    +'" stroke="var(--ink)" stroke-width="1" stroke-dasharray="3 3"/>';
+  s+='<circle cx="'+cx.toFixed(1)+'" cy="'+cy.toFixed(1)+'" r="5.5" fill="var(--mod)" '
+    +'stroke="var(--card)" stroke-width="2"/>';
+  s+='<line x1="'+x0+'" y1="'+yb+'" x2="'+(x0+W)+'" y2="'+yb+'" stroke="var(--axis)" stroke-width="1.5"/>';
+  s+='<line x1="'+x0+'" y1="'+y0+'" x2="'+x0+'" y2="'+yb+'" stroke="var(--axis)" stroke-width="1.5"/>';
+  [0,9,18,27,36].forEach(function(l){
+    s+='<text x="'+X(l).toFixed(1)+'" y="'+(yb+14)+'" text-anchor="middle" '
+      +'font-family="ui-monospace,monospace" font-size="8.5" fill="var(--ink-3)">'+l+'</text>';
+  });
+  s+='<text x="'+(x0+W/2)+'" y="'+(yb+29)+'" text-anchor="middle" '
+    +'font-family="ui-monospace,monospace" font-size="9.5" fill="var(--ink-2)">axial length, in</text>';
+  s+='<text x="11" y="'+(y0+H/2)+'" text-anchor="middle" font-family="ui-monospace,monospace" '
+    +'font-size="9.5" fill="var(--ink-2)" transform="rotate(-90 11 '+(y0+H/2)+')">P_F, psi</text>';
+  $("modFig").innerHTML=s;
+}
+
+function dnvFig(Lnow){
+  var x0=34,y0=14,W=266,H=140,yb=y0+H,LMAX=36,tc=T-FCA,mx=4.5;
+  function X(l){return x0+l/LMAX*W}
+  function Y(m){return yb-Math.min(m,mx)/mx*H}
+  var s='';
+  [1,2,3,4].forEach(function(v){
+    s+='<line x1="'+x0+'" y1="'+Y(v).toFixed(1)+'" x2="'+(x0+W)+'" y2="'+Y(v).toFixed(1)
+      +'" stroke="var(--grid)"/>';
+    s+='<text x="'+(x0-6)+'" y="'+(Y(v)+3.5).toFixed(1)+'" text-anchor="end" '
+      +'font-family="ui-monospace,monospace" font-size="8.5" fill="var(--ink-3)">'+v+'</text>';
+  });
+  function curve(fn,col,dash){
+    var p=[];
+    for(var l=0.25;l<=LMAX;l+=0.25)p.push(X(l).toFixed(1)+","+Y(fn(l)).toFixed(1));
+    return '<polyline points="'+p.join(" ")+'" fill="none" stroke="'+col+'" stroke-width="2"'
+      +(dash?' stroke-dasharray="'+dash+'"':'')+'/>';
+  }
+  s+=curve(function(l){return Mmod(l*l/(D*T))},"var(--mod)","");
+  s+=curve(function(l){return Qdnv(l)},"var(--dnv)","");
+  s+=curve(function(l){return Mt579(lam579(l,tc))},"var(--api)","5 3");
+  s+='<line x1="'+X(Math.min(Lnow,LMAX)).toFixed(1)+'" y1="'+y0+'" x2="'
+    +X(Math.min(Lnow,LMAX)).toFixed(1)+'" y2="'+yb+'" stroke="var(--ink)" stroke-width="1" '
+    +'stroke-dasharray="3 3"/>';
+  s+='<line x1="'+x0+'" y1="'+yb+'" x2="'+(x0+W)+'" y2="'+yb+'" stroke="var(--axis)" stroke-width="1.5"/>';
+  s+='<line x1="'+x0+'" y1="'+y0+'" x2="'+x0+'" y2="'+yb+'" stroke="var(--axis)" stroke-width="1.5"/>';
+  [0,9,18,27,36].forEach(function(l){
+    s+='<text x="'+X(l).toFixed(1)+'" y="'+(yb+14)+'" text-anchor="middle" '
+      +'font-family="ui-monospace,monospace" font-size="8.5" fill="var(--ink-3)">'+l+'</text>';
+  });
+  s+='<text x="'+(x0+W)+'" y="'+(y0+11)+'" text-anchor="end" font-family="ui-monospace,monospace" '
+    +'font-size="9.5" fill="var(--mod)">M \u2014 B31G</text>';
+  s+='<text x="'+(x0+W)+'" y="'+(y0+24)+'" text-anchor="end" font-family="ui-monospace,monospace" '
+    +'font-size="9.5" fill="var(--dnv)">Q \u2014 DNV</text>';
+  s+='<text x="'+(x0+W)+'" y="'+(y0+37)+'" text-anchor="end" font-family="ui-monospace,monospace" '
+    +'font-size="9.5" fill="var(--api)">Mt \u2014 API 579</text>';
+  s+='<text x="'+(x0+W/2)+'" y="'+(yb+29)+'" text-anchor="middle" '
+    +'font-family="ui-monospace,monospace" font-size="9.5" fill="var(--ink-2)">axial length, in</text>';
+  $("dnvFig").innerHTML=s;
+}
+
+function apiFig(a1){
+  var x0=34,y0=14,W=266,H=148,yb=y0+H,LMX=8;
+  function X(l){return x0+Math.min(l,LMX)/LMX*W}
+  function Y(r){return yb-Math.max(0,Math.min(r,1))*H}
+  var s='';
+  [0.2,0.4,0.6,0.8,1.0].forEach(function(v){
+    s+='<line x1="'+x0+'" y1="'+Y(v).toFixed(1)+'" x2="'+(x0+W)+'" y2="'+Y(v).toFixed(1)
+      +'" stroke="var(--grid)"/>';
+    s+='<text x="'+(x0-6)+'" y="'+(Y(v)+3.5).toFixed(1)+'" text-anchor="end" '
+      +'font-family="ui-monospace,monospace" font-size="8.5" fill="var(--ink-3)">'+v.toFixed(1)+'</text>';
+  });
+  var p=[];
+  for(var l=0;l<=LMX;l+=0.05){
+    var Mt=Mt579(l);
+    p.push(X(l).toFixed(1)+","+Y(RSFa*(1-1/Mt)/(1-RSFa/Mt)).toFixed(1));
+  }
+  s+='<polygon points="'+x0+','+y0+' '+p.join(" ")+' '+(x0+W)+','+y0
+    +'" fill="var(--api)" opacity="0.10"/>';
+  s+='<polyline points="'+p.join(" ")+'" fill="none" stroke="var(--api)" stroke-width="2.4"/>';
+  s+='<line x1="'+x0+'" y1="'+Y(0.2).toFixed(1)+'" x2="'+(x0+W)+'" y2="'+Y(0.2).toFixed(1)
+    +'" stroke="var(--bad)" stroke-width="1.4" stroke-dasharray="5 4"/>';
+  s+='<text x="'+(x0+4)+'" y="'+(Y(0.2)-5).toFixed(1)+'" font-family="ui-monospace,monospace" '
+    +'font-size="8.5" fill="var(--bad)">Rt = 0.20 floor</text>';
+  var pass=a1.RSF>=RSFa&&a1.Rt>=0.20;
+  s+='<circle cx="'+X(a1.lam).toFixed(1)+'" cy="'+Y(a1.Rt).toFixed(1)+'" r="6" fill="'
+    +(pass?"var(--rs)":"var(--bad)")+'" stroke="var(--card)" stroke-width="2"/>';
+  s+='<text x="'+(x0+W-2)+'" y="'+(y0+12)+'" text-anchor="end" '
+    +'font-family="ui-monospace,monospace" font-size="9.5" fill="var(--api)">acceptable region</text>';
+  s+='<line x1="'+x0+'" y1="'+yb+'" x2="'+(x0+W)+'" y2="'+yb+'" stroke="var(--axis)" stroke-width="1.5"/>';
+  s+='<line x1="'+x0+'" y1="'+y0+'" x2="'+x0+'" y2="'+yb+'" stroke="var(--axis)" stroke-width="1.5"/>';
+  [0,2,4,6,8].forEach(function(l){
+    s+='<text x="'+X(l).toFixed(1)+'" y="'+(yb+14)+'" text-anchor="middle" '
+      +'font-family="ui-monospace,monospace" font-size="8.5" fill="var(--ink-3)">'+l+'</text>';
+  });
+  s+='<text x="'+(x0+W/2)+'" y="'+(yb+29)+'" text-anchor="middle" '
+    +'font-family="ui-monospace,monospace" font-size="9.5" fill="var(--ink-2)">\u03bb</text>';
+  s+='<text x="11" y="'+(y0+H/2)+'" text-anchor="middle" font-family="ui-monospace,monospace" '
+    +'font-size="9.5" fill="var(--ink-2)" transform="rotate(-90 11 '+(y0+H/2)+')">Rt</text>';
+  $("apiFig").innerHTML=s;
+}
+
+/* ================= GEOMETRY TAB ================= */
+function geoDraw(){
+  var dPct=+$("gD").value, L=+$("gL").value, wPct=+$("gW").value;
+  var dt=dPct/100, CIRC=Math.PI*D, W=CIRC*wPct/100;
+  var PIN=2*SFLOW*T/D;
+  function pfm(d2,l){ if(d2<=0||l<=0)return PIN;
+    var z=l*l/(D*T),M=Mmod(z); return 2*(SFLOW*(1-0.85*d2)/(1-0.85*d2/M))*T/D; }
+  var P=pfm(dt,L), Ps=P*F, erf=MAOP>0?MAOP/Ps:NaN;
+
+  $("geoBig").textContent=f0(P)+" psi";
+  $("geoSub").innerHTML=Math.round(P/PIN*100)+"% of intact &nbsp;·&nbsp; allowable "
+    +f0(Ps)+" &nbsp;·&nbsp; ERF "+fx(erf,2);
+  $("gvD").textContent=dPct+"% wt ("+fx(dt*T,3)+" in)";
+  $("gvL").textContent=fx(L,2)+" in";
+  $("gvW").textContent=wPct+"% circ ("+fx(W,2)+" in)";
+  var z=L*L/(D*T);
+  $("ghD").textContent="ligament "+fx((1-dt)*T,3)+" in";
+  $("ghL").textContent="z = "+fx(z,2)+"   M = "+fx(Mmod(z),3);
+  $("ghW").textContent="arc "+Math.round(wPct*3.6)+"\u00b0  \u00b7  not an input to any method";
+  $("gwMsg").textContent = wPct>=95
+    ? "Full wrap. Same answer as a 2% sliver \u2014 width was never in the equation."
+    : "Drag width end to end. The pressure above will not change by one psi.";
+
+  /* gauge */
+  var gx=6,gw=288,gy=14,gh=15;
+  var mx=Math.max(PIN,MAOP*1.1);
+  function GX(v){return gx+Math.min(v,mx)/mx*gw}
+  var g='';
+  g+='<rect x="'+gx+'" y="'+gy+'" width="'+gw+'" height="'+gh+'" rx="4" '
+    +'fill="rgba(255,255,255,0.22)"/>';
+  g+='<rect x="'+gx+'" y="'+gy+'" width="'+(GX(P)-gx).toFixed(1)+'" height="'+gh
+    +'" rx="4" fill="var(--hero-fg)" opacity="0.92"/>';
+  if(MAOP>0&&MAOP<mx){
+    g+='<line x1="'+GX(MAOP).toFixed(1)+'" y1="'+(gy-5)+'" x2="'+GX(MAOP).toFixed(1)
+      +'" y2="'+(gy+gh+5)+'" stroke="var(--hero-fg)" stroke-width="2"/>';
+    g+='<text x="'+GX(MAOP).toFixed(1)+'" y="'+(gy+gh+18)+'" text-anchor="middle" '
+      +'font-family="ui-monospace,monospace" font-size="9" fill="var(--hero-fg)" '
+      +'opacity="0.9">operating</text>';
+  }
+  g+='<text x="'+gx+'" y="'+(gy-5)+'" font-family="ui-monospace,monospace" font-size="9" '
+    +'fill="var(--hero-fg)" opacity="0.7">0</text>';
+  g+='<text x="'+(gx+gw)+'" y="'+(gy-5)+'" text-anchor="end" '
+    +'font-family="ui-monospace,monospace" font-size="9" fill="var(--hero-fg)" '
+    +'opacity="0.7">intact '+f0(PIN)+'</text>';
+  $("geoGauge").innerHTML=g;
+
+  /* deltas */
+  var dS=pfm(Math.min(dt*1.25,0.99),L), lS=pfm(dt,L*1.25), wS=P;
+  var rows='<tr><th>Change</th><th style="text-align:right">P<sub>F</sub>, psi</th>'
+    +'<th style="text-align:right">Shift, %</th></tr>';
+  [["Depth +25%","var(--loss)",dS],["Length +25%","var(--band)",lS],
+   ["Width +25%","var(--ink-3)",wS]].forEach(function(r){
+    var pc=(r[2]-P)/P*100, flat=Math.abs(pc)<0.05;
+    rows+='<tr><td><span class="sw" style="background:'+r[1]+'"></span>'+r[0]+'</td>'
+      +'<td class="dv">'+f0(r[2])+'</td><td class="dv" style="color:'
+      +(flat?"var(--ink-3)":"var(--loss)")+'">'
+      +(flat?"0.0":(pc>0?"+":"")+pc.toFixed(1))+'</td></tr>';
+  });
+  $("geoDelta").innerHTML=rows;
+
+  geoPlan(dt,L,wPct); geoAxial(dt,L); geoRing(dt,wPct);
+}
+
+function geoPlan(dt,L,wPct){
+  var x0=26,y0=18,PW=272,PH=110,LMAX=36;
+  var pw=Math.min(PW-8,PW*(L/LMAX)+8), ph=PH*(wPct/100);
+  var px=x0+(PW-pw)/2, py=y0+(PH-ph)/2, s='';
+  s+='<rect x="'+x0+'" y="'+y0+'" width="'+PW+'" height="'+PH+'" fill="var(--fig-steel)" '
+    +'stroke="var(--fig-edge)"/>';
+  s+='<defs><pattern id="ghx" width="6" height="6" patternTransform="rotate(45)" '
+    +'patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="6" '
+    +'stroke="var(--band)" stroke-width="1.7" opacity="0.6"/></pattern></defs>';
+  s+='<rect x="'+px+'" y="'+y0+'" width="'+pw+'" height="'+PH+'" fill="url(#ghx)"/>';
+  s+='<rect x="'+px+'" y="'+y0+'" width="'+pw+'" height="'+PH+'" fill="none" '
+    +'stroke="var(--band)" stroke-width="1.5" stroke-dasharray="4 3"/>';
+  s+='<rect x="'+px+'" y="'+py+'" width="'+pw+'" height="'+ph+'" rx="5" fill="var(--loss)" '
+    +'opacity="'+(0.3+0.6*dt).toFixed(2)+'"/>';
+  s+='<text x="'+(px+pw/2)+'" y="11" text-anchor="middle" font-family="ui-monospace,monospace" '
+    +'font-size="9" fill="var(--band)">L (axial) \u2192</text>';
+  s+='<text x="13" y="'+(y0+PH/2)+'" text-anchor="middle" font-family="ui-monospace,monospace" '
+    +'font-size="9" fill="var(--ink-2)" transform="rotate(-90 13 '+(y0+PH/2)
+    +')">W (around) \u2195</text>';
+  s+='<text x="'+(x0+PW)+'" y="'+(y0+PH+13)+'" text-anchor="end" '
+    +'font-family="ui-monospace,monospace" font-size="9" fill="var(--band)">'
+    +'hatched = what B31G evaluates</text>';
+  $("geoPlan").innerHTML=s;
+}
+
+function geoAxial(dt,L){
+  var x0=26,top=28,H=54,PW=272,LMAX=36,bot=top+H;
+  var pw=Math.min(PW-8,PW*(L/LMAX)+8), px=x0+(PW-pw)/2, pd=H*Math.min(dt,0.97), s='';
+  s+='<rect x="'+x0+'" y="'+top+'" width="'+PW+'" height="'+H+'" fill="var(--fig-steel)" '
+    +'stroke="var(--fig-edge)"/>';
+  s+='<path d="M'+x0+' '+top+' H'+px+' q5 0 8 '+pd+' H'+(px+pw-8)+' q3 -'+pd+' 8 -'+pd
+    +' H'+(x0+PW)+' V'+top+' Z" fill="var(--fig-void)"/>';
+  s+='<path d="M'+px+' '+top+' q5 0 8 '+pd+' H'+(px+pw-8)+' q3 -'+pd+' 8 -'+pd
+    +'" fill="none" stroke="var(--loss)" stroke-width="2.3"/>';
+  s+='<line x1="'+x0+'" y1="'+bot+'" x2="'+(x0+PW)+'" y2="'+bot
+    +'" stroke="var(--axis)" stroke-width="2"/>';
+  var mx=px+pw/2;
+  s+='<line x1="'+mx+'" y1="'+top+'" x2="'+mx+'" y2="'+(top+pd)
+    +'" stroke="var(--loss)" stroke-width="1.4"/>';
+  s+='<text x="'+(mx+6)+'" y="'+(top+pd/2+3)+'" font-family="ui-monospace,monospace" '
+    +'font-size="9" fill="var(--loss)">d</text>';
+  s+='<line x1="'+px+'" y1="17" x2="'+(px+pw)+'" y2="17" stroke="var(--band)" stroke-width="1.4"/>';
+  s+='<text x="'+mx+'" y="12" text-anchor="middle" font-family="ui-monospace,monospace" '
+    +'font-size="9" fill="var(--band)">L</text>';
+  s+='<text x="'+x0+'" y="'+(bot+17)+'" font-family="ui-monospace,monospace" font-size="9" '
+    +'fill="var(--dnv)">\u2190 hoop</text>';
+  s+='<text x="'+(x0+PW)+'" y="'+(bot+17)+'" text-anchor="end" '
+    +'font-family="ui-monospace,monospace" font-size="9" fill="var(--dnv)">hoop \u2192</text>';
+  s+='<text x="'+(x0+PW/2)+'" y="'+(bot+17)+'" text-anchor="middle" '
+    +'font-family="ui-monospace,monospace" font-size="9" fill="var(--ink-3)">wall</text>';
+  $("geoAxial").innerHTML=s;
+}
+
+function geoRing(dt,wPct){
+  var cx=160,cy=68,R=54,wall=14;
+  var ang=wPct/100*Math.PI*2,a0=-Math.PI/2-ang/2,a1=-Math.PI/2+ang/2;
+  var Ri=R-wall, Rp=R-wall*(1-Math.min(dt,0.95));
+  function pt(r,a){return [(cx+r*Math.cos(a)).toFixed(2),(cy+r*Math.sin(a)).toFixed(2)]}
+  var big=ang>Math.PI?1:0, s='';
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="var(--fig-steel)" stroke="var(--fig-edge)"/>';
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+Ri+'" fill="var(--fig-void)" stroke="var(--fig-edge)"/>';
+  if(wPct>0&&dt>0){
+    var A=pt(Ri,a0),B=pt(Rp,a0),C=pt(Rp,a1),E=pt(Ri,a1);
+    s+='<path d="M'+A[0]+' '+A[1]+' L'+B[0]+' '+B[1]+' A'+Rp+' '+Rp+' 0 '+big+' 1 '
+      +C[0]+' '+C[1]+' L'+E[0]+' '+E[1]+' A'+Ri+' '+Ri+' 0 '+big+' 0 '+A[0]+' '+A[1]
+      +' Z" fill="var(--loss)" opacity="0.8"/>';
+  }
+  s+='<text x="'+cx+'" y="'+(cy+4)+'" text-anchor="middle" font-family="ui-monospace,monospace" '
+    +'font-size="10" fill="var(--ink-2)">'+Math.round(wPct*3.6)+'\u00b0</text>';
+  s+='<text x="'+cx+'" y="130" text-anchor="middle" font-family="ui-monospace,monospace" '
+    +'font-size="9.5" fill="var(--ink-3)">width changes this picture only</text>';
+  $("geoRing").innerHTML=s;
+}
+
+/* ================= SCREENING ================= */
+var FEATS=[],FILTERED=[],PAGE=0,PER=50,_scrW=0;
+
+/* --- per-feature evaluation, Modified B31G --- */
+function evalFeat(f){
+  var d_=f.od||D, t_=f.wt||T, sm=f.smys||SMYS, mp=f.maop||MAOP;
+  var sf=sm+10000, dt=f.dt, L=f.L;
+  var z=L*L/(d_*t_), M=z<=50?Math.sqrt(1+0.6275*z-0.003375*z*z):0.032*z+3.3;
+  var Pf=2*(sf*(1-0.85*dt)/(1-0.85*dt/M))*t_/d_;
+  var Psafe=Pf*F, erf=Psafe>0?mp/Psafe:Infinity;
+  /* through-wall capacity decides leak vs rupture at this length */
+  var dtw=0.99, Ptw=2*(sf*(1-0.85*dtw)/(1-0.85*dtw/M))*t_/d_;
+  var mode=Ptw>mp?"leak":"rupture";
+  var zone = (erf>=1||dt>=0.80)?"imm" : erf>=0.90?"sch" : erf>=0.80?"mon" : "ok";
+  /* years until this feature reaches ERF 1.00 at its surface growth rate */
+  var rate=(f.surf==="int"?(+$("iCRint").value||0):(+$("iCRext").value||0));
+  var dc=critDepth(L,mp/F,d_,t_,sf), dcap=isFinite(dc)?Math.min(dc,0.80):0.80;
+  var yrs = rate<=0 ? NaN : (dcap<=dt ? 0 : (dcap-dt)*t_/(rate/1000));
+  return Object.assign(f,{Pf:Pf,Psafe:Psafe,erf:erf,mode:mode,zone:zone,M:M,z:z,
+    od:d_,wt:t_,smys:sm,maop:mp,yrs:yrs,rate:rate});
+}
+
+/* --- flexible tally parsing --- */
+function parseTally(txt){
+  var lines=txt.split(/\r?\n/).map(function(s){return s.trim()}).filter(Boolean);
+  if(!lines.length)return{rows:[],msg:"Nothing pasted."};
+  var split=function(s){return s.split(/[\t,;|]+/).map(function(x){return x.trim()})};
+  var first=split(lines[0]);
+  var hasHeader=first.some(function(c){return c&&isNaN(parseFloat(c))});
+  var cols={id:-1,depth:-1,length:-1,od:-1,wt:-1,smys:-1,maop:-1,surf:-1};
+  if(hasHeader){
+    first.forEach(function(c,k){
+      var s=c.toLowerCase();
+      if(cols.surf<0&&/(surf|internal|external|ext\/int|int\/ext|side|location)/.test(s))cols.surf=k;
+      else if(cols.id<0&&/(^id$|feature|anomaly|name|ref)/.test(s))cols.id=k;
+      else if(cols.depth<0&&/(depth|d\/t|peak|loss|wt%|%wt)/.test(s))cols.depth=k;
+      else if(cols.length<0&&/(len|axial|long)/.test(s))cols.length=k;
+      else if(cols.od<0&&/(od|outside|diam)/.test(s))cols.od=k;
+      else if(cols.wt<0&&/(wall|thick|^wt$|nominal)/.test(s))cols.wt=k;
+      else if(cols.smys<0&&/(smys|yield|grade)/.test(s))cols.smys=k;
+      else if(cols.maop<0&&/(maop|mop|press)/.test(s))cols.maop=k;
+    });
+  }
+  if(cols.depth<0||cols.length<0){
+    /* positional fallback: id, depth, length */
+    cols.id=first.length>2?0:-1;
+    cols.depth=first.length>2?1:0;
+    cols.length=first.length>2?2:1;
+  }
+  var rows=[],bad=0;
+  lines.slice(hasHeader?1:0).forEach(function(ln,n){
+    var c=split(ln);
+    var dv=parseFloat(c[cols.depth]), lv=parseFloat(c[cols.length]);
+    if(!isFinite(dv)||!isFinite(lv)||lv<=0||dv<=0){bad++;return}
+    var dt=dv>1?dv/100:dv;
+    if(dt>=1)dt=0.99;
+    var sv=cols.surf>=0&&c[cols.surf]?c[cols.surf].toLowerCase():"";
+    var surf=/^(i|int)/.test(sv)?"int":/^(e|ext|o|od)/.test(sv)?"ext":"unk";
+    var f={id:cols.id>=0&&c[cols.id]?c[cols.id]:"row "+(n+1),dt:dt,L:lv,surf:surf};
+    if(cols.od>=0&&isFinite(parseFloat(c[cols.od])))f.od=parseFloat(c[cols.od]);
+    if(cols.wt>=0&&isFinite(parseFloat(c[cols.wt])))f.wt=parseFloat(c[cols.wt]);
+    if(cols.smys>=0&&isFinite(parseFloat(c[cols.smys])))f.smys=parseFloat(c[cols.smys]);
+    if(cols.maop>=0&&isFinite(parseFloat(c[cols.maop])))f.maop=parseFloat(c[cols.maop]);
+    rows.push(f);
+  });
+  return{rows:rows,bad:bad,header:hasHeader,cols:cols};
+}
+
+/* --- boundary curves: critical depth at each length --- */
+function critDepth(L,Ptarget,d_,t_,sf){
+  var z=L*L/(d_*t_), M=z<=50?Math.sqrt(1+0.6275*z-0.003375*z*z):0.032*z+3.3;
+  var r=(Ptarget*d_/(2*t_))/sf;
+  if(r>=1)return NaN;
+  var x=(1-r)/(0.85*(1-r/M));
+  return (x>0&&x<1)?x:NaN;
+}
+function crossoverLen(d_,t_,sf,mp){
+  function ptw(L){var z=L*L/(d_*t_),M=z<=50?Math.sqrt(1+0.6275*z-0.003375*z*z):0.032*z+3.3;
+    return 2*(sf*(1-0.85*0.99)/(1-0.85*0.99/M))*t_/d_}
+  if(ptw(0.25)<=mp)return 0;
+  if(ptw(400)>mp)return Infinity;
+  var lo=0.25,hi=400;
+  for(var k=0;k<60;k++){var m=(lo+hi)/2; if(ptw(m)>mp)lo=m; else hi=m}
+  return (lo+hi)/2;
+}
+
+function applyFilter(){
+  var zone=$("scrZone").value, minE=+$("scrErf").value||0;
+  var mode=$("scrMode").value, find=$("scrFind").value.trim().toLowerCase();
+  var surf=$("scrSurf").value;
+  FILTERED=FEATS.filter(function(f){
+    if(zone==="act"&&f.zone!=="imm"&&f.zone!=="sch")return false;
+    if(zone==="imm"&&f.zone!=="imm")return false;
+    if(zone==="sch"&&f.zone!=="sch")return false;
+    if(zone==="mon"&&f.zone!=="mon")return false;
+    if(isFinite(minE)&&f.erf<minE)return false;
+    if(mode!=="any"&&f.mode!==mode)return false;
+    if(surf!=="any"&&f.surf!==surf)return false;
+    if(find&&f.id.toLowerCase().indexOf(find)<0)return false;
+    return true;
+  }).sort(function(a,b){return b.erf-a.erf});
+}
+
+function screenDraw(){
+  if(!FEATS.length){
+    $("scrBig").textContent="\u2014";
+    $("scrSide").innerHTML="no features loaded";
+    $("scrHero").className="hero";
+    $("scrTable").innerHTML='<tr><td>Drop a CSV file above to begin.</td></tr>';
+    editTable();
+    $("scrMore").textContent="";
+    drawScatter();
+    return;
+  }
+  FEATS.forEach(evalFeat);
+  applyFilter();
+  var imm=FEATS.filter(function(f){return f.zone==="imm"}).length;
+  var sch=FEATS.filter(function(f){return f.zone==="sch"}).length;
+  var mon=FEATS.filter(function(f){return f.zone==="mon"}).length;
+  var rup=FEATS.filter(function(f){return f.mode==="rupture"&&f.zone==="imm"}).length;
+  $("scrBig").textContent=imm+" immediate";
+  $("scrSide").innerHTML=sch+" scheduled &nbsp;\u00b7&nbsp; "+mon+" monitor<br>"
+    +FEATS.length.toLocaleString("en-US")+" screened \u00b7 "+rup+" immediate would rupture";
+  $("scrHero").className="hero "+(imm?"bad":sch?"warn":"ok");
+
+  var rows='<tr><th>ID</th><th style="text-align:right">Depth, % wt</th>'
+    +'<th style="text-align:right">L, in</th><th style="text-align:right">ERF</th>'
+    +'<th style="text-align:right">Allowable, psi</th><th style="text-align:right">Yr to 1.0</th>'
+    +'<th style="text-align:right">Surface</th><th style="text-align:right">Mode</th></tr>';
+  FILTERED.slice(0,40).forEach(function(f){
+    var col=f.zone==="imm"?"var(--bad)":f.zone==="sch"?"var(--warn)":
+            f.zone==="mon"?"var(--dnv)":"var(--ink-2)";
+    rows+='<tr><td style="color:'+col+'"><b>'+f.id+'</b></td>'
+      +'<td class="n">'+fx(f.dt*100,1)+'</td><td class="n">'+fx(f.L,2)+'</td>'
+      +'<td class="n" style="color:'+col+'">'+fx(f.erf,2)+'</td>'
+      +'<td class="n">'+f0(f.Psafe)+'</td>'
+      +'<td class="n">'+(isFinite(f.yrs)?(f.yrs===0?"now":fx(f.yrs,1)):"\u2014")+'</td>'
+      +'<td class="n">'+f.surf+'</td>'
+      +'<td class="n" style="color:'+(f.mode==="rupture"?"var(--bad)":"var(--ink-2)")+'">'
+      +f.mode+'</td></tr>';
+  });
+  $("scrTable").innerHTML=rows;
+  editTable();
+  $("scrMore").textContent=FILTERED.length>40
+    ? "Showing the worst 40 of "+FILTERED.length.toLocaleString("en-US")
+      +" that match the filter. Export to get the full list."
+    : FILTERED.length+" match the filter.";
+  drawScatter();
+}
+
+function drawScatter(){
+  /* _scrW guards the ResizeObserver against its own feedback loop */
+  var cv=$("scrCanvas"); if(!cv)return;
+  var wrap=cv.parentNode, cssW=wrap.clientWidth;
+  /* the pane may still be display:none, in which case clientWidth is 0 — defer */
+  if(!cssW||cssW<200)return;
+  var cssH=Math.max(260,Math.min(520,Math.round(cssW*0.62)));
+  var dpr=window.devicePixelRatio||1;
+  cv.width=Math.round(cssW*dpr); cv.height=Math.round(cssH*dpr);
+  cv.style.width=cssW+"px"; cv.style.height=cssH+"px";
+  _scrW=cssW;
+  var g=cv.getContext&&cv.getContext("2d"); if(!g)return;
+  g.setTransform(dpr,0,0,dpr,0,0);
+  var cs=getComputedStyle(document.body);
+  function V(n){return cs.getPropertyValue(n).trim()||"#888"}
+  g.clearRect(0,0,cssW,cssH);
+  g.fillStyle=V("--card"); g.fillRect(0,0,cssW,cssH);
+
+  var pad={l:52,r:16,t:30,b:40};
+  var W=cssW-pad.l-pad.r, H=cssH-pad.t-pad.b;
+  var Lmax=Math.max(12,Math.min(60,FEATS.length
+    ? Math.max.apply(null,FEATS.map(function(f){return f.L}))*1.1 : 24));
+  function X(l){return pad.l+Math.min(l,Lmax)/Lmax*W}
+  function Y(d){return pad.t+(1-Math.min(d,1))*H}
+
+  /* grid */
+  g.strokeStyle=V("--grid"); g.lineWidth=1;
+  g.font="10px ui-monospace, monospace"; g.fillStyle=V("--ink-3");
+  for(var q=0;q<=100;q+=20){
+    var y=Y(q/100)+0.5;
+    g.beginPath(); g.moveTo(pad.l,y); g.lineTo(pad.l+W,y); g.stroke();
+    g.textAlign="right"; g.textBaseline="middle"; g.fillText(q+"%",pad.l-7,y);
+  }
+  var step=Lmax<=16?4:Lmax<=32?8:12;
+  for(var q=0;q<=Lmax;q+=step){
+    var x=X(q)+0.5;
+    g.beginPath(); g.moveTo(x,pad.t); g.lineTo(x,pad.t+H); g.stroke();
+    g.textAlign="center"; g.textBaseline="top"; g.fillText(q,x,pad.t+H+6);
+  }
+
+  var sf=SMYS+10000;
+  /* crossover */
+  var xo=crossoverLen(D,T,sf,MAOP);
+  if(isFinite(xo)&&xo>0&&xo<Lmax){
+    g.save(); g.strokeStyle=V("--ok"); g.lineWidth=1.6; g.setLineDash([3,4]);
+    g.beginPath(); g.moveTo(X(xo),pad.t-4); g.lineTo(X(xo),pad.t+H); g.stroke(); g.restore();
+    var lx=X(xo), near=lx>pad.l+W*0.62;
+    g.fillStyle=V("--ok"); g.textBaseline="bottom";
+    g.textAlign=near?"right":"left";
+    g.fillText("leak \u2502 rupture  "+xo.toFixed(1)+'"',lx+(near?-5:5),pad.t-7);
+  }
+  /* boundary curves */
+  function curve(Ptarget,col,dash,lab){
+    g.save(); g.strokeStyle=col; g.lineWidth=2.2;
+    if(dash)g.setLineDash(dash);
+    g.beginPath(); var started=false,lastY=null,anySolution=false;
+    for(var l=0.25;l<=Lmax;l+=Lmax/300){
+      var dc=critDepth(l,Ptarget,D,T,sf);
+      /* no solution means even a through-wall flaw of this length holds the target,
+         so the boundary sits at 100% wall rather than nowhere */
+      if(!isFinite(dc)||dc>=1)dc=1; else if(dc<=0)dc=0.001; else anySolution=true;
+      var x=X(l),y=Y(dc);
+      if(!started){g.moveTo(x,y);started=true}else g.lineTo(x,y);
+      lastY=y;
+    }
+    g.stroke(); g.restore();
+    if(lastY!==null&&anySolution){
+      g.fillStyle=col; g.textAlign="right"; g.textBaseline="bottom";
+      g.fillText(lab,pad.l+W-4,Math.max(pad.t+12,Math.min(lastY-5,pad.t+H-4)));
+    }
+  }
+  if(MAOP>0){
+    curve(MAOP/F,V("--bad"),null,"ERF 1.00");
+    curve(MAOP/F/0.9,V("--warn"),[6,4],"ERF 0.90");
+  }
+  /* 80% wt limit */
+  g.save(); g.strokeStyle=V("--bad"); g.lineWidth=1.2; g.setLineDash([2,4]);
+  g.beginPath(); g.moveTo(pad.l,Y(0.8)); g.lineTo(pad.l+W,Y(0.8)); g.stroke(); g.restore();
+
+  /* points */
+  var zc={imm:V("--bad"),sch:V("--warn"),mon:V("--dnv"),ok:V("--ink-3")};
+  var shown=FILTERED.length?FILTERED:FEATS;
+  var dim=FEATS.filter(function(f){return shown.indexOf(f)<0});
+  dim.forEach(function(f){
+    g.globalAlpha=0.13; g.fillStyle=zc[f.zone];
+    g.beginPath(); g.arc(X(f.L),Y(f.dt),2.4,0,6.2832); g.fill();
+  });
+  g.globalAlpha=1;
+  ["ok","mon","sch","imm"].forEach(function(z){
+    g.fillStyle=zc[z];
+    shown.forEach(function(f){
+      if(f.zone!==z)return;
+      g.globalAlpha=z==="imm"?0.95:0.6;
+      g.beginPath(); g.arc(X(f.L),Y(f.dt),z==="imm"?3.6:2.8,0,6.2832); g.fill();
+    });
+  });
+  g.globalAlpha=1;
+
+  /* frame + axis titles */
+  g.strokeStyle=V("--axis"); g.lineWidth=1.5;
+  g.beginPath(); g.moveTo(pad.l,pad.t); g.lineTo(pad.l,pad.t+H); g.lineTo(pad.l+W,pad.t+H); g.stroke();
+  g.fillStyle=V("--ink-2"); g.font="11px ui-monospace, monospace";
+  g.textAlign="center"; g.textBaseline="top";
+  g.fillText("axial length, in",pad.l+W/2,pad.t+H+21);
+  g.save(); g.translate(13,pad.t+H/2); g.rotate(-Math.PI/2);
+  g.textBaseline="middle"; g.fillText("depth, % wall",0,0); g.restore();
+
+  cv._map={X:X,Y:Y,pad:pad,W:W,H:H};
+  $("scrKey").innerHTML=
+     '<span class="zimm"><i style="background:'+zc.imm+'"></i>immediate</span>'
+    +'<span class="zsch"><i style="background:'+zc.sch+'"></i>scheduled</span>'
+    +'<span class="zmon"><i style="background:'+zc.mon+'"></i>monitor</span>'
+    +'<span class="zok"><i style="background:'+zc.ok+'"></i>acceptable</span>';
+}
+
+/* --- editable tally grid --- */
+function editTable(){
+  var n=FEATS.length;
+  $("scrCount").textContent=n?"("+n.toLocaleString("en-US")+" rows)":"";
+  if(!n){$("scrEdit").innerHTML='<tr><td colspan="10" style="padding:10px 0;'
+    +'color:var(--ink-3)">Nothing loaded.</td></tr>';$("scrPage").textContent="";return}
+  var pages=Math.max(1,Math.ceil(n/PER));
+  if(PAGE>=pages)PAGE=pages-1; if(PAGE<0)PAGE=0;
+  var from=PAGE*PER, to=Math.min(n,from+PER);
+  var s='<colgroup>'
+    +'<col style="width:15%"><col style="width:12%"><col style="width:11%">'
+    +'<col style="width:11%"><col style="width:11%"><col style="width:11%">'
+    +'<col style="width:8%"><col style="width:9%"><col style="width:8%">'
+    +'<col style="width:4%"></colgroup>'
+    +'<tr class="hdr"><th>ID</th><th>Surface</th><th>Depth % wt</th>'
+    +'<th>Length in</th><th>OD in</th><th>WT in</th><th>ERF</th>'
+    +'<th>Yr to 1.0</th><th>Mode</th><th></th></tr>';
+  for(var k=from;k<to;k++){
+    var f=FEATS[k];
+    var col=f.zone==="imm"?"var(--bad)":f.zone==="sch"?"var(--warn)":
+            f.zone==="mon"?"var(--dnv)":"var(--ink-2)";
+    s+='<tr data-k="'+k+'">'
+      +'<td data-label="ID"><input data-f="id" value="'
+        +String(f.id).replace(/"/g,"&quot;")+'"></td>'
+      +'<td data-label="Surface"><select data-f="surf">'
+        +'<option value="int"'+(f.surf==="int"?" selected":"")+'>internal</option>'
+        +'<option value="ext"'+(f.surf==="ext"?" selected":"")+'>external</option>'
+        +'<option value="unk"'+(f.surf==="unk"?" selected":"")+'>unspecified</option>'
+      +'</select></td>'
+      +'<td data-label="Depth % wt"><input data-f="dt" type="number" step="0.1" value="'
+        +(f.dt*100).toFixed(1)+'"></td>'
+      +'<td data-label="Length in"><input data-f="L" type="number" step="0.05" value="'
+        +f.L.toFixed(2)+'"></td>'
+      +'<td data-label="OD in"><input data-f="od" type="number" step="0.001" value="'
+        +(f.odOv||"")+'" placeholder="'+fx(D,3)+'"></td>'
+      +'<td data-label="WT in"><input data-f="wt" type="number" step="0.001" value="'
+        +(f.wtOv||"")+'" placeholder="'+fx(T,4)+'"></td>'
+      +'<td class="ro" data-label="ERF" style="color:'+col+'">'+fx(f.erf,2)+'</td>'
+      +'<td class="ro" data-label="Yr to 1.0">'
+        +(isFinite(f.yrs)?(f.yrs===0?"now":fx(f.yrs,1)):"\u2014")+'</td>'
+      +'<td class="ro" data-label="Mode" style="color:'
+        +(f.mode==="rupture"?"var(--bad)":"var(--ink-3)")+'">'+f.mode+'</td>'
+      +'<td class="act"><button class="del" data-del="'+k+'">\u00d7</button></td>'
+      +'</tr>';
+  }
+  $("scrEdit").innerHTML=s;
+  $("scrPage").textContent=(from+1)+"\u2013"+to+" of "+n.toLocaleString("en-US");
+  var tb=$("scrEdit");
+  Array.prototype.forEach.call(tb.querySelectorAll("input,select"),function(el){
+    el.addEventListener("change",function(){
+      var k=+el.closest("tr").dataset.k, fld=el.dataset.f, v=el.value;
+      var f=FEATS[k];
+      if(fld==="id")f.id=v||("row "+(k+1));
+      else if(fld==="surf")f.surf=v;
+      else if(fld==="dt"){var q=parseFloat(v); if(isFinite(q)&&q>0)f.dt=Math.min(q/100,0.99)}
+      else if(fld==="L"){var q=parseFloat(v); if(isFinite(q)&&q>0)f.L=q}
+      else if(fld==="od"){var q=parseFloat(v); f.odOv=isFinite(q)&&q>0?q:null; f.od=f.odOv||null}
+      else if(fld==="wt"){var q=parseFloat(v); f.wtOv=isFinite(q)&&q>0?q:null; f.wt=f.wtOv||null}
+      screenDraw();
+    });
+  });
+  Array.prototype.forEach.call(tb.querySelectorAll("[data-del]"),function(b){
+    b.addEventListener("click",function(){
+      FEATS.splice(+b.dataset.del,1); screenDraw();
+    });
+  });
+}
+
+/* hover identification */
+function scrHover(ev){
+  var cv=$("scrCanvas"); if(!cv||!cv._map||!FEATS.length)return;
+  var r=cv.getBoundingClientRect();
+  var mx=ev.clientX-r.left, my=ev.clientY-r.top;
+  var m=cv._map, best=null,bd=1e9;
+  FEATS.forEach(function(f){
+    var dx=m.X(f.L)-mx, dy=m.Y(f.dt)-my, d2=dx*dx+dy*dy;
+    if(d2<bd){bd=d2;best=f}
+  });
+  if(best&&bd<400){
+    $("scrHover").innerHTML="<b>"+best.id+"</b> \u2014 "+fx(best.dt*100,1)+"% wt \u00d7 "
+      +fx(best.L,2)+" in \u00b7 ERF "+fx(best.erf,2)+" \u00b7 allowable "+f0(best.Psafe)
+      +" psi \u00b7 "+best.mode+" \u00b7 <b>"+best.zone+"</b>";
+  }
+}
+
+function sampleTally(){
+  var out=["id,surface,depth,length"],n=800;
+  for(var k=0;k<n;k++){
+    var u=Math.random();
+    var d=8+Math.pow(Math.random(),1.9)*72;
+    var L=0.4+Math.pow(Math.random(),2.2)*26;
+    if(u>0.97){d=Math.min(88,d+22);L=L+6}
+    var sf=Math.random()<0.55?"int":"ext";
+    out.push("ANOM-"+String(k+1).padStart(4,"0")+","+sf+","+d.toFixed(1)+","+L.toFixed(2));
+  }
+  return out.join("\n");
+}
+
+function exportFiltered(){
+  if(!FILTERED.length)return;
+  var lines=["id,surface,depth_pct_wt,length_in,erf,allowable_psi,burst_psi,years_to_erf1,mode,zone"];
+  FILTERED.forEach(function(f){
+    lines.push([f.id,f.surf,(f.dt*100).toFixed(1),f.L.toFixed(2),f.erf.toFixed(3),
+      Math.round(f.Psafe),Math.round(f.Pf),
+      isFinite(f.yrs)?f.yrs.toFixed(1):"",f.mode,f.zone].join(","));
+  });
+  var blob=new Blob([lines.join("\n")],{type:"text/csv"});
+  var a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="screened_features.csv"; a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href)},1000);
+}
+
+/* ---------- wiring ---------- */
+["iD","iT","iS","iU","iP","iFCA","iGm","iGd","iEd","iStD","iDx","rD","rL","iProf","iCR","iTol"]
+  .forEach(function(id){$(id).addEventListener("input",draw)});
+$("iF").addEventListener("change",draw);
+$("iMawpMode").addEventListener("change",draw);
+$("iJur").addEventListener("change",draw);
+$("iMawpVal").addEventListener("input",draw);
+$("gD").addEventListener("input",function(){$("rD").value=$("gD").value;draw()});
+$("gL").addEventListener("input",function(){$("rL").value=$("gL").value;draw()});
+$("gW").addEventListener("input",geoDraw);
+function ingest(text,source){
+  var r=parseTally(text);
+  FEATS=r.rows; PAGE=0;
+  $("scrParse").innerHTML=FEATS.length
+    ? (source?"<b>"+source+"</b> \u2014 ":"")+"parsed <b>"
+      +FEATS.length.toLocaleString("en-US")+"</b> features"
+      +(r.bad?", skipped "+r.bad+" unreadable line"+(r.bad>1?"s":""):"")
+      +(r.header?" (header row detected)":" (no header \u2014 read as id, depth, length)")+"."
+    : "Nothing parsed"+(source?" from <b>"+source+"</b>":"")
+      +". Check that depth and length columns are present and numeric.";
+  screenDraw();
+  if(FEATS.length)$("scrEditWrap").open=true;
+}
+function readFile(file){
+  if(!file)return;
+  if(/\.(xlsx|xls)$/i.test(file.name)){
+    $("scrParse").innerHTML="<b>"+file.name+"</b> is an Excel workbook. Save it as CSV "
+      +"(File \u2192 Save As \u2192 CSV) and load that instead.";
+    return;
+  }
+  var fr=new FileReader();
+  fr.onload=function(){ingest(String(fr.result),file.name)};
+  fr.onerror=function(){$("scrParse").textContent="Could not read that file."};
+  fr.readAsText(file);
+}
+$("scrRun").addEventListener("click",function(){ingest($("scrData").value,"pasted text")});
+$("scrDrop").addEventListener("click",function(){$("scrFile").click()});
+$("scrFile").addEventListener("change",function(){
+  readFile($("scrFile").files&&$("scrFile").files[0]);
+  $("scrFile").value="";
+});
+["dragenter","dragover"].forEach(function(e){
+  $("scrDrop").addEventListener(e,function(ev){
+    ev.preventDefault();$("scrDrop").classList.add("over")});
+});
+["dragleave","drop"].forEach(function(e){
+  $("scrDrop").addEventListener(e,function(ev){
+    ev.preventDefault();$("scrDrop").classList.remove("over")});
+});
+$("scrDrop").addEventListener("drop",function(ev){
+  var dt=ev.dataTransfer;
+  if(dt&&dt.files&&dt.files.length)readFile(dt.files[0]);
+});
+$("scrSample").addEventListener("click",function(ev){
+  ev.preventDefault();
+  $("scrData").value=sampleTally();
+  ingest($("scrData").value,"example data");
+});
+$("scrClear").addEventListener("click",function(){
+  FEATS=[];FILTERED=[];PAGE=0;$("scrData").value="";
+  $("scrParse").textContent="No features loaded yet."; screenDraw();
+});
+$("scrExport").addEventListener("click",exportFiltered);
+$("scrPrev").addEventListener("click",function(){PAGE--;editTable()});
+$("scrNext").addEventListener("click",function(){PAGE++;editTable()});
+$("scrAdd").addEventListener("click",function(){
+  FEATS.push({id:"NEW-"+(FEATS.length+1),dt:0.30,L:2,surf:"ext"});
+  PAGE=Math.floor((FEATS.length-1)/PER); screenDraw();
+  $("scrEditWrap").open=true;
+});
+["scrSurf"].forEach(function(id){$(id).addEventListener("change",screenDraw)});
+["iCRint","iCRext"].forEach(function(id){$(id).addEventListener("input",screenDraw)});
+["scrZone","scrMode"].forEach(function(id){
+  $(id).addEventListener("change",screenDraw)});
+["scrErf","scrFind"].forEach(function(id){
+  $(id).addEventListener("input",screenDraw)});
+$("scrCanvas").addEventListener("mousemove",scrHover);
+window.addEventListener("resize",function(){drawScatter()});
+if(window.ResizeObserver){
+  new ResizeObserver(function(entries){
+    var w=Math.round(entries[0].contentRect.width);
+    if(w>200&&Math.abs(w-_scrW)>1){_scrW=w;drawScatter()}
+  }).observe($("scrCanvas").parentNode);
+}
+/* the grid opening or closing reflows the page above the plot */
+$("scrEditWrap").addEventListener("toggle",function(){
+  requestAnimationFrame(function(){drawScatter()});
+});
+$("bSync").addEventListener("click",syncProfile);
+$("bFlat").addEventListener("click",flatProfile);
+
+function setView(wide){
+  document.body.classList.toggle("wide",wide);
+  $("vwDesk").setAttribute("aria-pressed",wide?"true":"false");
+  $("vwMob").setAttribute("aria-pressed",wide?"false":"true");
+  draw();
+}
+$("vwDesk").addEventListener("click",function(){setView(true)});
+$("vwMob").addEventListener("click",function(){setView(false)});
+setView(window.innerWidth>=900);
+
+/* ---------- colour theme ---------- */
+var THEMES=["t-verde","t-crimson","t-violet","t-carbon"];
+var palBtn=$("palBtn"),palMenu=$("palMenu");
+Array.prototype.forEach.call(palMenu.querySelectorAll("button"),function(b){
+  var sw=(b.dataset.sw||"").split(",");
+  b.style.setProperty("--swatch",
+    "linear-gradient(90deg,"+sw[0]+" 0 40%,"+sw[1]+" 40% 70%,"+sw[2]+" 70% 100%)");
+  b.addEventListener("click",function(){
+    THEMES.forEach(function(t){document.body.classList.remove(t)});
+    if(b.dataset.t)document.body.classList.add(b.dataset.t);
+    Array.prototype.forEach.call(palMenu.querySelectorAll("button"),function(x){
+      x.setAttribute("aria-current",x===b?"true":"false")});
+    var mt=document.querySelector('meta[name="theme-color"]');
+    if(mt)mt.setAttribute("content",sw[0]);
+    closePal();
+    draw();
+  });
+});
+function openPal(){palMenu.hidden=false;palBtn.setAttribute("aria-expanded","true")}
+function closePal(){palMenu.hidden=true;palBtn.setAttribute("aria-expanded","false")}
+palBtn.addEventListener("click",function(e){
+  e.stopPropagation();
+  palMenu.hidden?openPal():closePal();
+});
+document.addEventListener("click",function(e){
+  if(!palMenu.hidden&&!palMenu.contains(e.target))closePal();
+});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closePal()});
+(function(){
+  var def=palMenu.querySelector('button[data-t="t-crimson"]');
+  document.body.classList.add("t-crimson");
+  def.setAttribute("aria-current","true");
+})();
+
+syncProfile();
+screenDraw();   /* paint the empty state so the screening tab is never blank */
+})();
+</script>
+</body>
+</html>
